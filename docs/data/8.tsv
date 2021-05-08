@@ -34,7 +34,7 @@ series	シリーズ|連続|一組	anc
 log	測定器|丸太|鈍重な人|航海日誌|を切り倒して丸太にする|を航海日誌に書き込む|を航走する	anc
 result	結果|成績|結果として生じる	anc
 yes	はい	anc
-talk	話す|(イメージ:相手の存在 + 双方向)論ずる|トーク	anc
+talk	話す	original
 movie	映画	anc
 update	更新する	anc
 comment	論評する|注釈|論評|意見	anc
@@ -103,7 +103,7 @@ early	早い|早く(時間･時期)	anc
 break	損なう	anc
 mark	記号|目標|印(をつける)|跡(を残す)|値段をつける|特徴づける|マルク(ドイツの通貨単位)	anc
 password	パスワード|合い言葉|合言葉|入場許可を得る手段	anc
-sound	聞こえる|音|測る(sound the depth of a river)	anc
+sound	聞こえる|音	original
 question	質問|問い	anc
 purchase	を買う|購入(品)	anc
 choose	選ぶ	anc
@@ -157,7 +157,7 @@ mean	を意味する|卑怯な	anc
 cause	原因|を引き起こす	anc
 agency	代理店|機関|媒体|作用	anc
 edition	版	anc
-put	置く|付ける(イメージ:ある所･状態に～を置く)	anc
+put	置く	original
 event	行事|出来事	anc
 holiday	祝日|休日|祭日	anc
 receive	を受け取る	anc

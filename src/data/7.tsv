@@ -59,7 +59,7 @@ state	状態|はっきり述べる|国家(の)|州|独立国|主権国|様子|�
 day	日|1日|曜日	anc
 out	外へ	original
 view	眺め|見方|を見る|と見なす	anc
-go	行く|(本来を離れて別の場･状態に)行く|至る	anc
+go	行く	original
 any	いくつかの|いく人かの|いかなる|どの	anc
 work	働く|(うまく)動く|仕事	anc
 there	そこ|そこに|そこで	anc
@@ -129,7 +129,7 @@ most	最も	anc
 music	音楽	anc
 forum	評議会|大広場|フォーラム|公開討論の場	anc
 file	綴じ込む|(書類など)を提出する	anc
-set	セットする|(イメージ:特定の位置･状態に置く)|準備が出来ている|ready	anc
+set	セットする|(定められた場所に)置く|準備が出来ている(ready)	original
 datum	資料|データ	wnjpn
 part	一部|部分|役割|分かれる|を分ける	anc
 rate	レート|割合|率|速度|を評価する	anc
@@ -162,7 +162,7 @@ way	道|方法	anc
 plan	計画|を計画する|計画する	anc
 man	男|男性|男の人	anc
 want	を望む|を欲しい|必要|不足	anc
-come	来る|(イメージ:到達点に焦点:ある対象に近づいていく･くる)	anc
+come	来る	original
 where	どこに|どこで|どこへ|どこ	anc
 type	型|タイプ|をタイプする	anc
 book	本	anc
@@ -217,7 +217,7 @@ family	家族	anc
 dvd	ビデオディスク|ヴィデオディスク|DVD	wnjpn
 code	暗号(にする)|慣例|法典|規約|符号|国際規約	anc
 real	本当の|実在する	anc
-say	言う|言う|たとえば|言い分|発言の機会|(the say)決定権	anc
+say	言う|言ってみれば(例えば)	original
 office	事務所|役所	anc
 technology	テクノロジー|科学技術|工芸学	anc
 item	品目|項目|条項|細目|種目|アイテム	anc
@@ -358,7 +358,7 @@ thread	細い線|糸|繊維|細いもの|スレッド|寿命|を貫く	anc
 drive	駆り立てる|原動力|意欲|運動	anc
 seller	売れるもの|売り手|よく売れるもの	anc
 party	会|パーティ|政党	anc
-tell	伝える|(イメージ:ある内容を相手に伝達することに焦点)|言う|区別する	anc
+tell	伝える|言う|区別する	original
 non	非|否定|拒否	anc
 quality	良質な|質|品質|優良性|特色|上流社会の	anc
 shall	相手の意向を尋ねる	anc
@@ -382,7 +382,7 @@ person	人|人称	anc
 private	私用の|個人の|私有の|秘密の|(反)public	anc
 act	作用する|行動する|行為|議定書	anc
 little	小さい|少し|かわいい|年少の|若い	anc
-keep	保つ|キープする(イメージ:時間的幅をもってもの･状態を保つ)	anc
+keep	保つ|キープする	original
 paper	紙|答案|試験用紙	anc
 fund	資金|たくわえ|財源	anc
 allow	許可する|許す|を可能にする	anc

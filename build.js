@@ -6,7 +6,7 @@ fs.readFileSync('mGSL/dist/mGSL.lst').toString().split('\n').forEach(line => {
   mGSL.push(line);
 });
 for (let i=1; i<range.length; i++) {
-  const outPath = 'english-words-typing/data/' + (i+6) + '.tsv';
+  const outPath = 'src/data/' + (i+6) + '.tsv';
   const problems = mGSL.slice(range[i - 1], range[i]);
   fs.writeFileSync(outPath, problems.join('\n'));
 }
