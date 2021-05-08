@@ -2,7 +2,7 @@
 [英単語とタイピングを同時に学ぶアプリ](https://marmooo.github.io/english-words-typing/)です。
 
 ## Installation
-1. npm install
+1. ```npm install```
 2. install [marmooo/mGSL](https://github.com/marmooo/mGSL)
 
 ## Build
