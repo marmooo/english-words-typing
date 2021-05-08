@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA&#45;142997649&#45;1"></script> -->
+    <!-- <script> -->
+    <!--   window.dataLayer = window.dataLayer || []; -->
+    <!--   function gtag(){dataLayer.push(arguments);} -->
+    <!--   gtag('js', new Date()); -->
+    <!--  -->
+    <!--   gtag('config', 'UA&#45;142997649&#45;1'); -->
+    <!-- </script> -->
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>英単語タイピング</title>
+    <meta name="description" content="英単語とタイピングを同時に学ぶアプリです。">
+    <script>
+      // if ('serviceWorker' in navigator) {
+      //   window.addEventListener('load', function() {
+      //     navigator.serviceWorker.register('/english-words-typing/sw.js');
+      //   });
+      // }
+    </script>
+    <link rel="apple-touch-icon" sizes="180x180" href="/english-words-typing/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/english-words-typing/favicon/favicon-48x48.png">
+    <link rel="manifest" href="/english-words-typing/favicon/manifest.json">
+    <link rel="mask-icon" href="/english-words-typing/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" >
+    <style>
+      @font-face {
+        font-family: textar-light;
+        src: local('Textar'),
+          url('https://marmooo.github.io/fonts/textar-light.woff2') format('woff2');
+        font-display: swap;
+      }
+      html,body { height:100%; }
+      pre.aa {
+        font-size: 2vw;
+        display: inline-block;
+        overflow: hidden;
+        text-align: left;
+        font-family: textar-light;
+        line-height: 1.1;
+        white-space: pre;
+        word-wrap: normal;
+      }
+      #roma { height: 3rem; }
+      #counter {
+        font-size:10rem; width:12rem; height:12rem; line-height:12rem; border-radius: 50%;
+        background:tomato; margin:auto; }
+      #aaOuter { background:transparent; display:flex; align-items:center; justify-content:center; }
+      #aa { position:relative; top:0; left:0; margin:auto; }
+      #typePanel { word-wrap: break-word; }
+      html[data-theme="dark"] { filter: invert(1) hue-rotate(180deg); }
+      @-moz-document url-prefix() { html[data-theme="dark"] { background-color:black; } }
+    </style>
+  </head>
+  <body>
+    <header id="header">
+      <nav class="navbar navbar-expand navbar-light">
+        <div class="container">
+          <a class="navbar-brand" href="/english-words-typing/">英単語タイピング</a>
+          <div class="navbar-nav">
+            <select id="gradeOption" class="ml-1 form-control form-control-sm" aria-label="コース">
+              <option>不規則動詞</option>
+              <option>小4</option>
+              <option>小5</option>
+              <option>小6</option>
+              <option>中1</option>
+              <option>中2</option>
+              <option selected>中3</option>
+              <option>高1</option>
+              <option>高2</option>
+              <option>高3</option>
+              <option>大学生</option>
+            </select>
+            <button title="音楽を再生" onclick="toggleBGM()" class="ml-2 close">
+              <svg id="bgmOn" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="#000000"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+              <svg id="bgmOff" class="d-none" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="#000000"><path d="M0 0h24v24H0z" fill="none"/><path d="M4.27 3L3 4.27l9 9v.28c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4v-1.73L19.73 21 21 19.73 4.27 3zM14 7h4V3h-6v5.18l2 2z"/></svg>
+            </button>
+            <button title="ダークモード切替" onclick="toggleDarkMode()" class="ml-2 close">🌓</button>
+            <button title="概要" class="ml-2 close d-sm-none" onclick="toggleOverview()" aria-label="概要">
+              <span aria-hidden="true">?</span>
+            </button>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main id="container" class="container">
+      <noscript>
+        <div class="alert alert-warning text-center">JavaScript を ON にしてください</div>
+      </noscript>
+      <div id="infoPanel">
+        <div class="row text-center">
+          <div class="col-sm">
+            <div id="overview" class="alert alert-info d-none d-sm-block">
+              <button type="button" class="close ml-3 d-sm-none" onclick="toggleOverview()" aria-label="閉じる">
+               <span aria-hidden="true">&times;</span>
+              </button>
+              <p>英単語とタイピングを同時に学ぶアプリです。
+              </p>
+              <footer>
+                <div>辞書 - <a href="https://github.com/marmooo/mGSL">mGSL</a>
+                  / <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> by
+                  <a href="https://github.com/marmooo">marmooo</a>
+                </div>
+                <div class="pt-3">
+                  <a class="px-1" href="/">Home</a>
+                  <a class="px-1" href="/terms/">Terms</a>
+                  <a class="px-1" href="https://github.com/marmooo/touch-kanji">Contact</a>
+                </div>
+                <div class="text-muted">&copy; <a href="https://github.com/marmooo">marmooo</a>
+                </div>
+              </footer>
+            </div>
+          </div>
+          <div class="col-sm">
+            <div class="alert alert-info">
+              <div class="h5">
+                <label><ruby>時間<rp>(</rp><rt>じかん</rt><rp>)</rp></ruby>:</label><span id="time" class="ml-1">180秒 / 180秒</span>
+                <span id="mode" class="ml-3 badge badge-info">EASY</span>
+              </div>
+              <div>
+                <button id="startButton" class="btn btm-sm btn-primary">SPACE: スタート / ESC: リセット</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <div id="countPanel" hidden>
+          <div id="counter"></div>
+          <pre class="aa">
+
+　　　　　ヒュン　　ヒュン　　ヒュン
+　　　ヒュン　 ミ彡 ⌒ ミ∩┫　　　ヒュン
+　　 　 　 　 .┃ (　・ω・)ノ┃ミ
+　　ヒュン　　彡/ ≡つ＝つ　　ヒュン
+　 　 　 　 　.┣U━┻≡┻
+　　　　ヒュン　 ( /￣∪　 　ヒュン
+          </pre>
+        </div>
+        <div id="scorePanel" class="text-center pb-3" hidden>
+          <h3 class="pt-3">タイピング結果</h3>
+          <pre class="aa">　　　　／￣|
+　　　　|　　｜
+　　　 ｜ 　｜.　彡⌒ ミ
+　 ,―　　　　＼(´・ω・｀)　スコアだよ！
+　| ＿＿_） 　 ｜　　ノ
+　| ＿＿_） 　 ｜）＿フ
+　| ＿＿_） 　 ｜
+　ヽ＿＿）＿／
+          </pre>
+          <table class="table table-striped">
+            <tr><td>総タイプ数</td><td><span id="totalType"></span> <span>回</span></td></tr>
+            <tr><td>スピード</td><td><span id="typeSpeed"></span> <span>回/秒</span></td></tr>
+            <tr><td>ミスタイプ数</td><td><span id="errorType"></span> <span>回</span></td></tr>
+          </table>
+          <a id="twitter" target="_blank" href="https://twitter.com/intent/tweet?text=英単語タイピングで遊んだよ!&url=https%3a%2f%2fmarmooo.github.com/english-words-typing%2f&hashtags=英単語タイピング" class="btn btn-primary" role="button">Twitter でつぶやく</a>
+        </div>
+        <div id="playPanel">
+          <div id="aaOuter">
+            <pre id="aa" class="aa">   ■   ■       ■  ■  ■    ■■■■ ■■■■■■
+■■■■■■■■■■■    ■  ■ ■     ■■■■   ■   
+   ■ ■ ■      ■■■■■■■■■        ■■■■■ 
+ ■■■■■■■■■    ■   ■   ■   ■■■■  ■  ■ 
+ ■   ■   ■    ■■■■■■■■■         ■  ■ 
+ ■   ■   ■    ■   ■   ■   ■■■■■■■■■■■
+■■■■■■■■■■■   ■■■■■■■■■   ■■■■ ■■■■■ 
+    ■■■           ■       ■  ■ ■   ■ 
+    ■ ■■     ■■■■■■■■■■■  ■  ■ ■   ■ 
+  ■■    ■■        ■       ■■■■ ■■■■■ 
+■■        ■       ■       ■    ■     
+
+モード切替もできるぞ
+1=EASY、2=HARD
+　　　　　　　　彡 ⌒ ミ　　彡 ⌒ ミ　　　　　　　スペルがわからない時は？
+　彡 ⌒ ミ　　 (´・ω・)　　 (・ω・｀) 　彡 ⌒ ミ
+　(　´・ω)　　（∪　Ｕ)　　 ( つと ﾉ　　(ω・｀ )
+　｜　Ｕ彡 ⌒ ミｕ-＿＿＿_彡 ⌒ ミ　 (∪ 彡⌒ ミ　　4=ローマ字を表示
+　　ｕ-ｕ (　　´・)　（　　(⌒ （´･ω･`）＼　　(・｀　　)　　5=音声読み上げだ！
+　　　　　（ 　　∪ 　＼　ヽﾉ（,,⊃⌒O～⌒ヽと　　 ﾉ
+　　 　 　 `ｕ-ｕ'　 　　＼ ／／;;;::*:::*:::*:::*:ヽ`u-u'　彡 ⌒ ミ
+　　　　　　　　　 彡⌒ ミ(　(:::;:*彡⌒ ミ:::*::*:彡 ⌒ミ(ω・｀ )
+　　　　彡 ⌒ ミ　(　　　)　＼::;;;::(　　　)　*:::*::(・｀　　)と　　) 　5秒減るけどな
+　 　 　 (　　´・)　(　　∪　 　＼ι 　　)　─～と　　　) - ｕ'
+　　 　 ｜　Ｕ） 　`ｕ-ｕ' 　 　 　 ｀ｕ-ｕ'　￣￣~.`ｕ-ｕ'
+            </pre>
+          </div>
+          <div id="typePanel" class="fixed-bottom container">
+            <div class="alert alert-info h1">
+              <div id="roma">run</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="index.js"></script>
+  </body>
+</html>
