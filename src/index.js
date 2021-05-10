@@ -277,10 +277,14 @@ function typeEvent(event) {
     } else {
       // const state = checkTypeStyle(currNode, currNode.textContent, event.key, romaNode);
       // if (!state) {
-      //   new Audio('cat.mp3').play();
+      //   const errorAudio = new Audio('cat.mp3');
+      //   errorAudio.volume = 0.3;
+      //   errorAudio.play();
       //   errorCount += 1;
       // }
-      new Audio('cat.mp3').play();
+      const errorAudio = new Audio('cat.mp3');
+      errorAudio.volume = 0.3;
+      errorAudio.play();
       errorCount += 1;
     }
     if (typeIndex == romaNode.childNodes.length) {

@@ -17,7 +17,7 @@ if(word=='c'&&key=='k'&&(nextWord=='a'||nextWord=='u'||nextWord=='o')){fixTypeSt
 return true;}
 function typeNormal(currNode){currNode.classList.remove('d-none');new Audio('keyboard.mp3').play();currNode.style.color='silver';typeIndex+=1;normalCount+=1;}
 function nextProblem(){new Audio('correct.mp3').play();typeIndex=0;solveCount+=1;typable();}
-function typeEvent(event){const currNode=romaNode.childNodes[typeIndex];if(event.key.match(/^[^0-9]$/)){if(event.key==currNode.textContent){typeNormal(currNode);}else{new Audio('cat.mp3').play();errorCount+=1;}
+function typeEvent(event){const currNode=romaNode.childNodes[typeIndex];if(event.key.match(/^[^0-9]$/)){if(event.key==currNode.textContent){typeNormal(currNode);}else{const errorAudio=new Audio('cat.mp3');errorAudio.volume=0.3;errorAudio.play();errorCount+=1;}
 if(typeIndex==romaNode.childNodes.length){nextProblem();}}else{switch(event.key){case '1':mode.textContent='EASY';replay();break;case '2':mode.textContent='HARD';replay();break;case '4':[...romaNode.children].forEach(span=>{span.classList.remove('d-none');});downTime(5);break;case '5':const text=romaNode.textContent;loopVoice(text,1);downTime(5);break;case 'Escape':case 'Esc':replay();break;}}}
 function replay(){clearInterval(typeTimer);document.body.removeEventListener('keydown',typeEvent);initTime();loadProblems();countdown();typeIndex=normalCount=errorCount=solveCount=0;countPanel.hidden=false;scorePanel.hidden=true;}
 function calcAAOuterSize(){var headerHeight=document.getElementById('header').offsetHeight;var typePanelHeight=document.getElementById('typePanel').offsetHeight;return document.documentElement.clientHeight-headerHeight-infoPanel.offsetHeight-typePanelHeight;}
