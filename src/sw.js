@@ -1,4 +1,4 @@
-var CACHE_NAME = '2021-05-11 12:00';
+var CACHE_NAME = '2021-05-26 08:25';
 var urlsToCache = [
   '/kanji-typing/',
   '/kanji-typing/index.js',
@@ -9,7 +9,7 @@ var urlsToCache = [
   '/kanji-typing/index.js',
   '/kanji-typing/keyboard.mp3',
   'https://marmooo.github.io/fonts/textar-light.woff2',
-  'https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css',
+  'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css',
 ];
 
 self.addEventListener('install', function(event) {
