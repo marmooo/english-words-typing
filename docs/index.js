@@ -20,8 +20,10 @@ if(word=='c'&&key=='k'&&(nextWord=='a'||nextWord=='u'||nextWord=='o')){fixTypeSt
 (nextWord=='a'||nextWord=='u'||nextWord=='e'||nextWord=='o')){fixTypeStyle(currNode,key);nextNode.textContent=nextWord;}else{return false;}
 return true;}
 function typeNormal(currNode){currNode.classList.remove('d-none');playAudio(keyboardAudio);currNode.style.color='silver';typeIndex+=1;normalCount+=1;}
+function underlineSpace(currNode){console.log(currNode);if(currNode.textContent==' '){currNode.style.removeProperty('text-decoration');}
+const nextNode=currNode.nextElementSibling;if(nextNode&&nextNode.textContent==' '){nextNode.style.textDecoration='underline';}}
 function nextProblem(){playAudio(correctAudio);typeIndex=0;solveCount+=1;typable();}
-function typeEvent(event){const currNode=romaNode.childNodes[typeIndex];if(event.key.match(/^[^0-9]$/)){if(event.key==currNode.textContent){typeNormal(currNode);}else{playAudio(incorrectAudio,0.3);errorCount+=1;}
+function typeEvent(event){const currNode=romaNode.childNodes[typeIndex];if(event.key.match(/^[^0-9]$/)){if(event.key==currNode.textContent){typeNormal(currNode);underlineSpace(currNode);}else{playAudio(incorrectAudio,0.3);errorCount+=1;}
 if(typeIndex==romaNode.childNodes.length){nextProblem();}}else{switch(event.key){case '1':mode.textContent='EASY';replay();break;case '2':mode.textContent='HARD';replay();break;case '4':[...romaNode.children].forEach(span=>{span.classList.remove('d-none');});downTime(5);break;case '5':const text=romaNode.textContent;loopVoice(text,1);downTime(5);break;case 'Escape':case 'Esc':replay();break;}}}
 function replay(){clearInterval(typeTimer);document.body.removeEventListener('keydown',typeEvent);initTime();loadProblems();countdown();typeIndex=normalCount=errorCount=solveCount=0;countPanel.hidden=false;scorePanel.hidden=true;}
 function calcAAOuterSize(){const typePanelHeight=document.getElementById('typePanel').offsetHeight;return document.documentElement.clientHeight-aa.parentNode.offsetTop-typePanelHeight;}
