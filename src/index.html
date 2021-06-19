@@ -95,29 +95,10 @@
       </noscript>
       <div id="infoPanel">
         <div class="row text-center">
-          <div class="col-sm">
-            <div id="overview" class="alert alert-info d-none d-sm-block">
-              <button type="button" class="close ml-3 d-sm-none" onclick="toggleOverview()" aria-label="閉じる">
-               <span aria-hidden="true">&times;</span>
-              </button>
-              <p>英単語とタイピングを同時に学ぶアプリです。
-              </p>
-              <footer>
-                <div>辞書 - <a href="https://github.com/marmooo/mGSL">mGSL</a>
-                  / <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> by
-                  <a href="https://github.com/marmooo">marmooo</a>
-                </div>
-                <div class="pt-3">
-                  <a class="px-1" href="/">Home</a>
-                  <a class="px-1" href="/terms/">Terms</a>
-                  <a class="px-1" href="https://github.com/marmooo/english-words-typing">Contact</a>
-                </div>
-                <div class="text-muted">&copy; <a href="https://github.com/marmooo">marmooo</a>
-                </div>
-              </footer>
-            </div>
+          <div class="col-sm-4 text-start">
+            <p>英単語とタイピングを同時に学ぶアプリです。</p>
           </div>
-          <div class="col-sm">
+          <div class="col-sm-8">
             <div class="alert alert-info">
               <div class="h5">
                 <label><ruby>時間<rp>(</rp><rt>じかん</rt><rp>)</rp></ruby>:</label><span id="time" class="ml-1">180秒 / 180秒</span>
@@ -190,14 +171,25 @@
 　　 　 ｜　Ｕ） 　`ｕ-ｕ' 　 　 　 ｀ｕ-ｕ'　￣￣~.`ｕ-ｕ'
             </pre>
           </div>
-          <div id="typePanel" class="fixed-bottom container">
-            <div class="alert alert-info h1">
-              <div id="roma">run</div>
-            </div>
+          <div id="typePanel" class="alert alert-info h1">
+            <div id="roma">run</div>
           </div>
         </div>
       </div>
     </main>
+    <footer class="pt-4 alert text-center">
+      <div>英文 - <a href="https://github.com/marmooo/graded-enja-corpus">graded-enja-corpus</a>
+        / <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> by
+        <a href="https://github.com/marmooo">marmooo</a>
+      </div>
+      <div class="pt-3">
+        <a class="px-1" href="/">Home</a>
+        <a class="px-1" href="/terms/">Terms</a>
+        <a class="px-1" href="https://github.com/marmooo/english-words-typing">Contact</a>
+      </div>
+      <div class="text-muted">&copy; <a href="https://github.com/marmooo">marmooo</a>
+      </div>
+    </footer>
     <script src="index.js"></script>
   </body>
 </html>
