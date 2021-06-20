@@ -353,21 +353,13 @@ function typeEvent(event) {
     }
   } else {
     switch (event.key) {
-      case '1':
-        mode.textContent = 'EASY';
-        replay();
-        break;
-      case '2':
-        mode.textContent = 'HARD';
-        replay();
-        break;
-      case '4':
+      case 'NonConvert':
         [...romaNode.children].forEach(span => {
           span.classList.remove('d-none');
         });
         downTime(5);
         break;
-      case '5':
+      case 'Convert':
         const text = romaNode.textContent;
         loopVoice(text, 1);
         downTime(5);
@@ -511,10 +503,6 @@ function startGame() {
 function startKeyEvent(event) {
   if (event.key == ' ' || event.key == 'Spacebar') {
     startGame();
-  } else if (event.key == 'E' || event.key == '1') {
-    mode.textContent = 'EASY';
-  } else if (event.key == 'H' || event.key == '2') {
-    mode.textContent = 'HARD';
   }
 }
 document.addEventListener('keydown', startKeyEvent);
@@ -575,11 +563,20 @@ function scoring() {
   document.addEventListener('keydown', startKeyEvent);
 }
 
+function changeMode() {
+  if (this.textContent == 'EASY') {
+    this.textContent = 'HARD';
+  } else {
+    this.textContent = 'EASY';
+  }
+}
+
 aa.parentNode.style.height = calcAAOuterSize() + 'px';
 resizeFontSize(aa);
 window.addEventListener('resize', function() {
   aa.parentNode.style.height = calcAAOuterSize() + 'px';
   resizeFontSize(aa);
 });
+document.getElementById('mode').onclick = changeMode;
 document.addEventListener('click', unlockAudio, { once:true, useCapture:true });
 

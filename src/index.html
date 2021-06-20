@@ -95,14 +95,18 @@
       </noscript>
       <div id="infoPanel">
         <div class="row text-center">
-          <div class="col-sm-4 text-start">
+          <div class="col-sm-4 text-start pb-3">
             <p>英単語とタイピングを同時に学ぶアプリです。</p>
+            <h6>キーバインド</h6>
+            <table class="table table-sm table-striped">
+              <tr><td><kbd>無変換</kbd></td><td>ローマ字表示</td><td><kbd>変換</kbd></td><td>音声読み上げ</td></tr>
+            </table>
           </div>
           <div class="col-sm-8">
             <div class="alert alert-info">
               <div class="h5">
                 <label><ruby>時間<rp>(</rp><rt>じかん</rt><rp>)</rp></ruby>:</label><span id="time" class="ml-1">180秒 / 180秒</span>
-                <span id="mode" class="ml-3 badge bg-info">EASY</span>
+                <button id="mode" class="ms-3 btn btn-secondary btn-sm">EASY</button>
               </div>
               <div>
                 <button id="startButton" class="btn btm-sm btn-primary">SPACE: スタート / ESC: リセット</button>
@@ -156,13 +160,11 @@
   ■■    ■■        ■       ■■■■ ■■■■■ 
 ■■        ■       ■       ■    ■     
 
-モード切替もできるぞ
-1=EASY、2=HARD
 　　　　　　　　彡 ⌒ ミ　　彡 ⌒ ミ　　　　　　　スペルがわからない時は？
 　彡 ⌒ ミ　　 (´・ω・)　　 (・ω・｀) 　彡 ⌒ ミ
 　(　´・ω)　　（∪　Ｕ)　　 ( つと ﾉ　　(ω・｀ )
-　｜　Ｕ彡 ⌒ ミｕ-＿＿＿_彡 ⌒ ミ　 (∪ 彡⌒ ミ　　4=ローマ字を表示
-　　ｕ-ｕ (　　´・)　（　　(⌒ （´･ω･`）＼　　(・｀　　)　　5=音声読み上げだ！
+　｜　Ｕ彡 ⌒ ミｕ-＿＿＿_彡 ⌒ ミ　 (∪ 彡⌒ ミ
+　　ｕ-ｕ (　　´・)　（　　(⌒ （´･ω･`）＼　　(・｀　　)　ヒント機能があるぞ！
 　　　　　（ 　　∪ 　＼　ヽﾉ（,,⊃⌒O～⌒ヽと　　 ﾉ
 　　 　 　 `ｕ-ｕ'　 　　＼ ／／;;;::*:::*:::*:::*:ヽ`u-u'　彡 ⌒ ミ
 　　　　　　　　　 彡⌒ ミ(　(:::;:*彡⌒ ミ:::*::*:彡 ⌒ミ(ω・｀ )
