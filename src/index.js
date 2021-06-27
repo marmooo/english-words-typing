@@ -180,7 +180,7 @@ function fixTypeStyle(currNode, word) {
 function appendWord(currNode, word) {
   const span = document.createElement('span');
   span.textContent = word;
-  currNode.parentNode.insertBefore(span, currNode.NextSibling);
+  currNode.parentNode.insertBefore(span, currNode.nextSibling);
 }
 
 // http://typingx0.net/key_l.html

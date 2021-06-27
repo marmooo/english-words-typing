@@ -12,7 +12,7 @@ function loadVoices(){const allVoicesObtained=new Promise(function(resolve,rejec
 loadVoices();function loopVoice(text,n){speechSynthesis.cancel();var msg=new SpeechSynthesisUtterance(text);msg.voice=englishVoices[Math.floor(Math.random()*englishVoices.length)];msg.lang='en-US';for(var i=0;i<n;i++){speechSynthesis.speak(msg);}}
 function loadProblems(){var grade=gradeOption.selectedIndex+3;if(grade>0){fetch('data/'+grade+'.tsv').then(function(response){return response.text();}).then(function(tsv){problems=tsv.split('\n').slice(0,-1).map(line=>{const[en,jaStr]=line.split('\t');const ja=jaStr.split('|').slice(0,3).join('\n');return{en:en,ja:ja};});}).catch(function(err){console.error(err);});}}
 function fixTypeStyle(currNode,word){currNode.textContent=word;typeNormal(currNode);}
-function appendWord(currNode,word){const span=document.createElement('span');span.textContent=word;currNode.parentNode.insertBefore(span,currNode.NextSibling);}
+function appendWord(currNode,word){const span=document.createElement('span');span.textContent=word;currNode.parentNode.insertBefore(span,currNode.nextSibling);}
 function checkTypeStyle(currNode,word,key,romaNode){const nodes=romaNode.childNodes;const nextNode=nodes[typeIndex+1];let nextWord;if(nextNode){nextWord=nextNode.textContent;}
 let prevWord;if(typeIndex!=0){prevWord=nodes[typeIndex-1].textContent;}
 let secondWord;if(nodes[typeIndex+2]){secondWord=nodes[typeIndex+2].textContent;}
