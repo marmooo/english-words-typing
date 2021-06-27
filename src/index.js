@@ -20,10 +20,81 @@ let normalCount = 0;
 let solveCount = 0;
 let problems = [];
 let englishVoices = [];
+let guide = false;
 let keyboardAudio, correctAudio, incorrectAudio, endAudio;
 loadAudios();
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 const audioContext = new AudioContext();
+const layout104 = {
+  'default': [
+    '{esc} ` 1 2 3 4 5 6 7 8 9 0 - =',
+    '{tab} q w e r t y u i o p [ ] \\',
+    '{lock} a s d f g h j k l ; \'',
+    '{shift} z x c v b n m , . /',
+    '🌏 無変換 {space} 変換',
+  ],
+  'shift': [
+    '{esc} ~ ! @ # $ % ^ & * ( ) _ +',
+    '{tab} Q W E R T Y U I O P { } |',
+    '{lock} A S D F G H J K L : "',
+    '{shift} Z X C V B N M < > ?',
+    '🌏 無変換 {space} 変換',
+  ]
+};
+const layout109 = {
+  'default': [
+    '{esc} 1 2 3 4 5 6 7 8 9 0 - ^ \\',
+    '{tab} q w e r t y u i o p @ [',
+    '{lock} a s d f g h j k l ; : ]',
+    '{shift} z x c v b n m , . / \\',
+    '🌏 無変換 {space} 変換',
+  ],
+  'shift': [
+    '{esc} ! " # $ % & \' ( ) = ~ |',
+    '{tab} Q W E R T Y U I O P ` {',
+    '{lock} A S D F G H J K L + * ]',
+    '{shift} Z X C V B N M < > ? _',
+    '🌏 無変換 {space} 変換',
+  ],
+};
+const keyboardDisplay = {
+  "{esc}": "Esc",
+  "{tab}": "Tab",
+  "{lock}": "Caps",
+  "{shift}": "Shift",
+  "{space}": " ",
+  "🌏": "日本語",
+};
+const simpleKeyboard = new SimpleKeyboard.default({
+  layout: layout109,
+  display: keyboardDisplay,
+  onInit: function(keyboard) {
+    document.getElementById('keyboard').classList.add('d-none');
+  },
+  onKeyPress: function(input) {
+    switch (input) {
+      case '{esc}': return typeEventKey('Esc');
+      case '{space}': return typeEventKey(' ');
+      case '無変換': return typeEventKey('NoConvert');
+      case '変換': return typeEventKey('Convert');
+      case '🌏':
+        const button = simpleKeyboard.getButtonElement('🌏');
+        if (simpleKeyboard.options.layout == layout109) {
+          keyboardDisplay['🌏'] = "英語";
+          simpleKeyboard.setOptions({ layout:layout104, display:keyboardDisplay });
+        } else {
+          keyboardDisplay['🌏'] = "日本語";
+          simpleKeyboard.setOptions({ layout:layout109, display:keyboardDisplay });
+        }
+        break;
+      case '{shift}': case '{lock}':
+        const shiftToggle = (simpleKeyboard.options.layoutName == "default") ? "shift" : "default";
+        simpleKeyboard.setOptions({ layoutName:shiftToggle });
+        break;
+      default: return typeEventKey(input);
+    }
+  }
+});
 
 
 function clearConfig() {
@@ -55,6 +126,46 @@ function toggleBGM() {
   }
 }
 
+function toggleKeyboard() {
+  const virtualKeyboardOn = document.getElementById('virtualKeyboardOn');
+  const virtualKeyboardOff = document.getElementById('virtualKeyboardOff');
+  if (virtualKeyboardOn.classList.contains('d-none')) {
+    virtualKeyboardOn.classList.remove('d-none');
+    virtualKeyboardOff.classList.add('d-none');
+    document.getElementById('keyboard').classList.remove('d-none');
+    aa.parentNode.style.height = calcAAOuterSize() + 'px';
+    resizeFontSize(aa);
+  } else {
+    virtualKeyboardOn.classList.add('d-none');
+    virtualKeyboardOff.classList.remove('d-none');
+    document.getElementById('keyboard').classList.add('d-none');
+    document.getElementById('guideSwitch').checked = false;
+    guide = false;
+    aa.parentNode.style.height = calcAAOuterSize() + 'px';
+    resizeFontSize(aa);
+  }
+}
+
+function toggleGuide() {
+  const virtualKeyboardOn = document.getElementById('virtualKeyboardOn');
+  const virtualKeyboardOff = document.getElementById('virtualKeyboardOff');
+  if (this.checked) {
+    virtualKeyboardOn.classList.remove('d-none');
+    virtualKeyboardOff.classList.add('d-none');
+    document.getElementById('keyboard').classList.remove('d-none');
+    aa.parentNode.style.height = calcAAOuterSize() + 'px';
+    resizeFontSize(aa);
+    guide = true;
+  } else {
+    virtualKeyboardOn.classList.add('d-none');
+    virtualKeyboardOff.classList.remove('d-none');
+    document.getElementById('keyboard').classList.add('d-none');
+    aa.parentNode.style.height = calcAAOuterSize() + 'px';
+    resizeFontSize(aa);
+    guide = false;
+  }
+}
+
 function toggleDarkMode() {
   if (localStorage.getItem('darkMode') == 1) {
     localStorage.setItem('darkMode', 0);
@@ -62,19 +173,6 @@ function toggleDarkMode() {
   } else {
     localStorage.setItem('darkMode', 1);
     document.documentElement.dataset.theme = 'dark';
-  }
-}
-
-function toggleOverview() {
-  var overview = document.getElementById('overview');
-  if (overview.dataset && overview.dataset.collapse == 'true') {
-    overview.dataset.collapse = 'false';
-    overview.classList.add('d-none');
-    overview.classList.add('d-sm-block');
-  } else {
-    overview.dataset.collapse = 'true';
-    overview.classList.remove('d-none');
-    overview.classList.remove('d-sm-block');
   }
 }
 
@@ -173,11 +271,13 @@ function loadProblems() {
 }
 
 function fixTypeStyle(currNode, word) {
+  removeGuide(currNode);
   currNode.textContent = word;
   typeNormal(currNode);
 }
 
 function appendWord(currNode, word) {
+  removeGuide(currNode);
   const span = document.createElement('span');
   span.textContent = word;
   currNode.parentNode.insertBefore(span, currNode.nextSibling);
@@ -316,7 +416,6 @@ function typeNormal(currNode) {
 }
 
 function underlineSpace(currNode) {
-  console.log(currNode);
   if (currNode.textContent == ' ') {
     currNode.style.removeProperty('text-decoration');
   }
@@ -333,11 +432,50 @@ function nextProblem() {
   typable();
 }
 
+function removeGuide(currNode) {
+  const prevNode = currNode.previousSiblingElement;
+  if (prevNode) {
+    let key = prevNode.textContent;
+    if (key == ' ') { key = '{space}'; }
+    const button = simpleKeyboard.getButtonElement(key);
+    button.classList.remove('bg-info');
+  }
+  let key = currNode.textContent;
+  if (key == ' ') { key = '{space}'; }
+  const button = simpleKeyboard.getButtonElement(key);
+  if (button) {
+    button.classList.remove('bg-info');
+    simpleKeyboard.setOptions({ layoutName:'default' });
+  } else {
+    const shift = simpleKeyboard.getButtonElement("{shift}");
+    shift.classList.remove('bg-info');
+  }
+}
+
+function showGuide(currNode) {
+  if (guide) {
+    let key = currNode.textContent;
+    if (key == ' ') { key = '{space}'; }
+    const button = simpleKeyboard.getButtonElement(key);
+    if (button) {
+      button.classList.add('bg-info');
+    } else {
+      const shift = simpleKeyboard.getButtonElement("{shift}");
+      shift.classList.add('bg-info');
+    }
+  }
+}
+
 function typeEvent(event) {
+  typeEventKey(event.key);
+}
+
+function typeEventKey(key) {
   const currNode = romaNode.childNodes[typeIndex];
-  if (event.key.match(/^[^0-9]$/)) {
-    if (event.key == currNode.textContent) {
+  if (key.match(/^[^0-9]$/)) {
+    if (key == currNode.textContent) {
       typeNormal(currNode);
+      removeGuide(currNode);
       underlineSpace(currNode);
     } else {
       // const state = checkTypeStyle(currNode, currNode.textContent, event.key, romaNode);
@@ -350,9 +488,11 @@ function typeEvent(event) {
     }
     if (typeIndex == romaNode.childNodes.length) {
       nextProblem();
+    } else {
+      showGuide(romaNode.childNodes[typeIndex]);
     }
   } else {
-    switch (event.key) {
+    switch (key) {
       case 'NonConvert':
         [...romaNode.children].forEach(span => {
           span.classList.remove('d-none');
@@ -364,6 +504,13 @@ function typeEvent(event) {
         loopVoice(text, 1);
         downTime(5);
         break;
+      case 'Shift': case 'CapsLock':
+        if (guide) {
+          const shiftToggle = (simpleKeyboard.options.layoutName == "default") ? "shift" : "default";
+          simpleKeyboard.setOptions({ layoutName:shiftToggle });
+          showGuide(romaNode.childNodes[typeIndex]);
+        }
+        break;
       case 'Escape': case 'Esc':
         replay();
         break;
@@ -373,6 +520,7 @@ function typeEvent(event) {
 
 function replay() {
   clearInterval(typeTimer);
+  removeGuide(romaNode.childNodes[typeIndex]);
   document.body.removeEventListener('keydown', typeEvent);
   initTime();
   loadProblems();
@@ -384,7 +532,8 @@ function replay() {
 
 function calcAAOuterSize() {
   const typePanelHeight = document.getElementById('typePanel').offsetHeight;
-  return document.documentElement.clientHeight - aa.parentNode.offsetTop - typePanelHeight;
+  const keyboardHeight = document.getElementById('keyboard').offsetHeight;
+  return document.documentElement.clientHeight - aa.parentNode.offsetTop - typePanelHeight - keyboardHeight;
 }
 
 function resizeFontSize(node) {
@@ -460,10 +609,13 @@ function typable() {
     romaNode.appendChild(span);
   }
   resizeFontSize(aa);
+  showGuide(romaNode.childNodes[0]);
 }
 
 function countdown() {
   typeIndex = normalCount = errorCount = solveCount = 0;
+  document.getElementById('guideSwitch').disabled = true;
+  document.getElementById('virtualKeyboard').disabled = true;
   playPanel.classList.add('d-none');
   countPanel.hidden = false;
   scorePanel.hidden = true;
@@ -477,6 +629,8 @@ function countdown() {
       counter.innerText = t;
     } else {
       clearInterval(timer);
+      document.getElementById('guideSwitch').disabled = false;
+      document.getElementById('virtualKeyboard').disabled = false;
       countPanel.hidden = true;
       scorePanel.hidden = true;
       playPanel.classList.remove('d-none');
@@ -486,7 +640,7 @@ function countdown() {
         bgm.play();
       }
       document.body.addEventListener('keydown', typeEvent);
-      startButton.addEventListener('click', startGame);
+      startButton.addEventListener('click', replay);
     }
   }, 1000);
 }
@@ -578,5 +732,6 @@ window.addEventListener('resize', function() {
   resizeFontSize(aa);
 });
 document.getElementById('mode').onclick = changeMode;
+document.getElementById('guideSwitch').onchange = toggleGuide;
 document.addEventListener('click', unlockAudio, { once:true, useCapture:true });
 
