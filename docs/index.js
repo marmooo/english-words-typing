@@ -40,9 +40,9 @@ function resizeFontSize(node){function getTextWidth(text,font){var context=tmpCa
 function getTextRect(text,fontSize,font,lineHeight){var lines=text.split('\n');var maxWidth=0;var fontConfig=fontSize+'px '+font;for(var i=0;i<lines.length;i++){var width=getTextWidth(lines[i],fontConfig);if(maxWidth<width){maxWidth=width;}}
 return[maxWidth,fontSize*lines.length*lineHeight];}
 function getPaddingRect(style){var width=parseFloat(style.paddingLeft)+parseFloat(style.paddingRight);var height=parseFloat(style.paddingTop)+parseFloat(style.paddingBottom);return[width,height];}
-var style=getComputedStyle(node);var font=style.fontFamily;var fontSize=parseFloat(style.fontSize);var lineHeight=parseFloat(style.lineHeight)/fontSize;var nodeHeight=calcAAOuterSize();var nodeWidth=infoPanel.clientWidth;var nodeRect=[nodeWidth,nodeHeight];var textRect=getTextRect(node.innerText,fontSize,font,lineHeight);var paddingRect=getPaddingRect(style);var rowFontSize=fontSize*(nodeRect[0]-paddingRect[0])/textRect[0]*0.90;var colFontSize=fontSize*(nodeRect[1]-paddingRect[1])/textRect[1]*0.90;var fontSize=rowFontSize;if(colFontSize<rowFontSize){fontSize=colFontSize+'px';}
-if(fontSize<1.0){fontSize=1.0;}
-node.style.fontSize=fontSize;}
+var style=getComputedStyle(node);var font=style.fontFamily;var fontSize=parseFloat(style.fontSize);var lineHeight=parseFloat(style.lineHeight)/fontSize;var nodeHeight=calcAAOuterSize();var nodeWidth=infoPanel.clientWidth;var nodeRect=[nodeWidth,nodeHeight];var textRect=getTextRect(node.innerText,fontSize,font,lineHeight);var paddingRect=getPaddingRect(style);var rowFontSize=fontSize*(nodeRect[0]-paddingRect[0])/textRect[0]*0.90;var colFontSize=fontSize*(nodeRect[1]-paddingRect[1])/textRect[1]*0.90;var fontSize=rowFontSize;if(colFontSize<rowFontSize){fontSize=colFontSize;}
+if(fontSize<16){fontSize=16;}
+node.style.fontSize=fontSize+'px';}
 function getRandomInt(min,max){var min=Math.ceil(min);var max=Math.floor(max);return Math.floor(Math.random()*(max-min))+min;}
 function typable(){const problem=problems[getRandomInt(0,problems.length)];aa.textContent=problem.ja;const roma=problem.en;if(mode.textContent=='EASY'){loopVoice(roma,1);}
 while(romaNode.firstChild){romaNode.removeChild(romaNode.firstChild);}

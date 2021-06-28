@@ -579,12 +579,12 @@ function resizeFontSize(node) {
   var colFontSize = fontSize * (nodeRect[1] - paddingRect[1]) / textRect[1] * 0.90;
   var fontSize = rowFontSize;
   if (colFontSize < rowFontSize) {
-    fontSize = colFontSize + 'px';
+    fontSize = colFontSize;
   }
-  if (fontSize < 1.0) {
-    fontSize = 1.0;
+  if (fontSize < 16) {
+    fontSize = 16;
   }
-  node.style.fontSize = fontSize;
+  node.style.fontSize = fontSize + 'px';
 }
 
 function getRandomInt(min, max) {
