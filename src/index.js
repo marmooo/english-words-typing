@@ -577,14 +577,11 @@ function resizeFontSize(node) {
   // Safariで正確な算出ができないので誤差ぶんだけ縮小化 (10%)
   var rowFontSize = fontSize * (nodeRect[0] - paddingRect[0]) / textRect[0] * 0.90;
   var colFontSize = fontSize * (nodeRect[1] - paddingRect[1]) / textRect[1] * 0.90;
-  var fontSize = rowFontSize;
   if (colFontSize < rowFontSize) {
-    fontSize = colFontSize;
+    node.style.fontSize = colFontSize + 'px';
+  } else {
+    node.style.fontSize = rowFontSize + 'px';
   }
-  if (fontSize < 16) {
-    fontSize = 16;
-  }
-  node.style.fontSize = fontSize + 'px';
 }
 
 function getRandomInt(min, max) {
