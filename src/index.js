@@ -502,7 +502,6 @@ function typeEventKey(key) {
       case 'Convert':
         const text = romaNode.textContent;
         loopVoice(text, 1);
-        downTime(5);
         break;
       case 'Shift': case 'CapsLock':
         if (guide) {
