@@ -1,4 +1,4 @@
-var CACHE_NAME = '2021-07-04 18:55';
+var CACHE_NAME = '2021-07-13 09:35';
 var urlsToCache = [
   '/kanji-typing/',
   '/kanji-typing/index.js',
@@ -8,6 +8,7 @@ var urlsToCache = [
   '/kanji-typing/end.mp3',
   '/kanji-typing/index.js',
   '/kanji-typing/keyboard.mp3',
+  '/english-words-typing/favicon/original.svg',
   'https://marmooo.github.io/fonts/textar-light.woff2',
   'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css',
   'https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/index.js',
