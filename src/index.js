@@ -254,7 +254,7 @@ function loopVoice(text, n) {
 }
 
 function loadProblems() {
-  var grade = gradeOption.selectedIndex + 3;
+  var grade = gradeOption.selectedIndex;
   if (grade > 0) {
     fetch('data/' + grade + '.tsv').then(function(response) {
       return response.text();
