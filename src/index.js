@@ -648,7 +648,6 @@ function countdown() {
         bgm.play();
       }
       document.addEventListener('keydown', typeEvent);
-      startButton.addEventListener('click', replay);
     }
   }, 1000);
 }
