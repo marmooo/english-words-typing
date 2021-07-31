@@ -653,18 +653,9 @@ function countdown() {
   }, 1000);
 }
 
-function startGame() {
-  clearInterval(typeTimer);
-  startButton.removeEventListener('click', startGame);
-  document.removeEventListener('keydown', startKeyEvent);
-  initTime();
-  loadProblems();
-  countdown();
-}
-
 function startKeyEvent(event) {
   if (event.key == ' ' || event.key == 'Spacebar') {
-    startGame();
+    replay();
   }
 }
 
@@ -740,7 +731,7 @@ window.addEventListener('resize', function() {
 });
 document.getElementById('mode').onclick = changeMode;
 document.getElementById('guideSwitch').onchange = toggleGuide;
-startButton.addEventListener('click', startGame);
+startButton.addEventListener('click', replay);
 document.addEventListener('keyup', upKeyEvent);
 document.addEventListener('keydown', startKeyEvent);
 document.addEventListener('click', unlockAudio, { once:true, useCapture:true });
