@@ -706,12 +706,8 @@ function scoring() {
   countPanel.classList.add('d-none');
   scorePanel.classList.remove('d-none');
   document.removeEventListener('keydown', typeEvent);
-  let time = parseInt(document.getElementById("time").textContent);
-  if (time < gameTime) {
-    time = gameTime - time;
-  }
   var grade = gradeOption.options[gradeOption.selectedIndex].value;
-  var typeSpeed = (normalCount / time).toFixed(2);
+  var typeSpeed = (normalCount / gameTime).toFixed(2);
   document.getElementById('totalType').innerText = normalCount + errorCount;
   document.getElementById('typeSpeed').innerText = typeSpeed;
   document.getElementById('errorType').innerText = errorCount;
