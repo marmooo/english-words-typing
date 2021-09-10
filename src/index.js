@@ -6,7 +6,7 @@ const startButton = document.getElementById('startButton');
 const romaNode = document.getElementById('roma');
 const gradeOption = document.getElementById('gradeOption');
 const aa = document.getElementById('aa');
-const gameTime = 180;
+const gameTime = 120;
 const tmpCanvas = document.createElement('canvas');
 const mode = document.getElementById('mode');
 let typeTimer;
