@@ -1,3 +1,4 @@
+okay	OK|大丈夫	anc
 teenage	十代	anc
 platinum	プラチナ(色･金属元素)	anc
 watt	ワット(電力･工率の単位)	anc
@@ -1167,6 +1168,7 @@ toddler	よちよち歩きの幼児|歩き始めの子|1～2才児	anc
 owe	負う|おかげだ|借りている	anc
 equality	等しいこと|平等|同等	anc
 tier	層|列|階段	anc
+pope	ローマ教皇(法王)	ejdict
 complement	補足|全数量|補足物|(文法)補語|補文|補数	anc
 needle	針|注射針|を針で縫う|をいらだたせる|針葉樹の葉	anc
 terrace	段地	anc
@@ -1353,6 +1355,7 @@ fade	衰えさせる|さめる	anc
 particle	微少量|粒子|微粒子|微量|不変化詞(前置詞･接続詞･接頭(接尾)辞など)	anc
 lip	に唇をあてる|を穴のふちにあてる|唇を使う|をつぶやく|唇の|口先だけの|生意気な言葉|唇	original
 strive	努力する|戦う	anc
+dm	decimeter〜decameter	ejdict
 harbour	港|(US英)harbor	original
 renaissance	ルネッサンス|文芸復興	anc
 donna	イタリアの貴婦人	anc
@@ -1995,6 +1998,3 @@ marvel	不思議に思う|驚く|驚異|驚くべきこと	anc
 disposition	性質|配置|廃棄	anc
 tsunami	(日本語)津波	anc
 mutant	突然変異による|突然変体|変種	anc
-aquarium	水族館|ガラスの水槽	anc
-communist	共産主義者	anc
-idiot	まぬけ|ばか|あほう	anc
