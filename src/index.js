@@ -414,8 +414,7 @@ function replay() {
 
 function calcAAOuterSize() {
   let height = document.documentElement.clientHeight;
-  height -= document.getElementById("header").offsetHeight;
-  height -= document.getElementById("infoPanel").offsetHeight;
+  height -= document.getElementById("timePanel").offsetHeight;
   height -= document.getElementById("typePanel").offsetHeight;
   height -= document.getElementById("keyboard").offsetHeight;
   return height;
@@ -525,6 +524,11 @@ function countdown() {
       playPanel.classList.remove("d-none");
       countPanel.classList.add("d-none");
       scorePanel.classList.add("d-none");
+      window.scrollTo({
+        top: document.getElementById("timePanel").getBoundingClientRect().top +
+          document.documentElement.scrollTop,
+        behavior: "auto",
+      });
       typable();
       startTypeTimer();
       if (localStorage.getItem("bgm") == 1) {

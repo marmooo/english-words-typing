@@ -64,7 +64,7 @@
     </style>
   </head>
   <body>
-    <header id="header">
+    <header>
       <nav class="navbar navbar-expand navbar-light">
         <div class="container flex-wrap">
           <a class="navbar-brand" href="/english-words-typing/">
@@ -109,7 +109,7 @@
       </noscript>
       <div id="infoPanel">
         <div class="row text-center">
-          <div class="col-sm-4 text-start pb-3">
+          <div class="col-sm text-start pb-3">
             <p>英単語とタイピングを同時に学ぶアプリです。</p>
             <h6>キーバインド</h6>
             <table class="table table-sm table-striped">
@@ -117,7 +117,7 @@
               <tr><td><kbd>変換</kbd></td><td>音声読み上げ</td></tr>
             </table>
           </div>
-          <div class="col-sm-8">
+          <div id="timePanel" class="col-sm">
             <div class="alert alert-info">
               <div class="row flex-wrap">
                 <div class="col p-1 h5 text-nowrap">
@@ -126,7 +126,7 @@
                 </div>
                 <div class="col p-1 m-auto">
                   <button id="mode" class="btn btn-secondary btn-sm">EASY</button>
-                  <div class="form-check form-check-inline form-switch text-nowrap ms-1">
+                  <div class="form-check form-check-inline form-switch text-nowrap ms-1 py-1">
                     <input class="form-check-input" type="checkbox" id="guideSwitch">
                     <label class="form-check-label" for="guideSwitch">ガイド</label>
                   </div>
