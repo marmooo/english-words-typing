@@ -533,6 +533,8 @@ function countdown() {
       playPanel.classList.remove("d-none");
       countPanel.classList.add("d-none");
       scorePanel.classList.add("d-none");
+      aa.parentNode.style.height = calcAAOuterSize() + "px";
+      resizeFontSize(aa);
       window.scrollTo({
         top: document.getElementById("timePanel").getBoundingClientRect().top +
           document.documentElement.scrollTop,
