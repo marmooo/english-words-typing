@@ -28,33 +28,33 @@ const AudioContext = window.AudioContext || window.webkitAudioContext;
 const audioContext = new AudioContext();
 const layout104 = {
   "default": [
-    "{esc} ` 1 2 3 4 5 6 7 8 9 0 - =",
-    "{tab} q w e r t y u i o p [ ] \\",
-    "{lock} a s d f g h j k l ; '",
-    "{shift} z x c v b n m , . /",
+    "{esc} ` 1 2 3 4 5 6 7 8 9 0 -",
+    "{tab} q w e r t y u i o p [ ]",
+    "{lock} a s d f g h j k l ;",
+    "{shift} z x c v b n m , .",
     "🌏 無変換 {space} 変換",
   ],
   "shift": [
-    "{esc} ~ ! @ # $ % ^ & * ( ) _ +",
-    "{tab} Q W E R T Y U I O P { } |",
-    '{lock} A S D F G H J K L : "',
-    "{shift} Z X C V B N M < > ?",
+    "{esc} ~ ! @ # $ % ^ & * ( ) _",
+    "{tab} Q W E R T Y U I O P { }",
+    '{lock} A S D F G H J K L :',
+    "{shift} Z X C V B N M < >",
     "🌏 無変換 {space} 変換",
   ],
 };
 const layout109 = {
   "default": [
-    "{esc} 1 2 3 4 5 6 7 8 9 0 - ^ \\",
-    "{tab} q w e r t y u i o p @ [",
-    "{lock} a s d f g h j k l ; : ]",
-    "{shift} z x c v b n m , . / \\",
+    "{esc} 1 2 3 4 5 6 7 8 9 0 -",
+    "{tab} q w e r t y u i o p",
+    "{lock} a s d f g h j k l ;",
+    "{shift} z x c v b n m , .",
     "🌏 無変換 {space} 変換",
   ],
   "shift": [
-    "{esc} ! \" # $ % & ' ( ) = ~ |",
-    "{tab} Q W E R T Y U I O P ` {",
-    "{lock} A S D F G H J K L + * ]",
-    "{shift} Z X C V B N M < > ? _",
+    "{esc} ! \" # $ % & ' ( ) =",
+    "{tab} Q W E R T Y U I O P",
+    "{lock} A S D F G H J K L +",
+    "{shift} Z X C V B N M < >",
     "🌏 無変換 {space} 変換",
   ],
 };
@@ -64,7 +64,7 @@ const keyboardDisplay = {
   "{lock}": "Caps",
   "{shift}": "Shift",
   "{space}": " ",
-  "🌏": "日本語",
+  "🌏": "🇯🇵",
 };
 const simpleKeyboard = new SimpleKeyboard.default({
   layout: layout109,
@@ -84,13 +84,13 @@ const simpleKeyboard = new SimpleKeyboard.default({
         return typeEventKey("Convert");
       case "🌏":
         if (simpleKeyboard.options.layout == layout109) {
-          keyboardDisplay["🌏"] = "英語";
+          keyboardDisplay["🌏"] = "🇺🇸";
           simpleKeyboard.setOptions({
             layout: layout104,
             display: keyboardDisplay,
           });
         } else {
-          keyboardDisplay["🌏"] = "日本語";
+          keyboardDisplay["🌏"] = "🇯🇵";
           simpleKeyboard.setOptions({
             layout: layout109,
             display: keyboardDisplay,
