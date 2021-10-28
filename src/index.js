@@ -622,7 +622,7 @@ function changeMode() {
   }
 }
 
-aa.parentNode.style.height = calcAAOuterSize() + "px";
+aa.parentNode.style.height = calcAAOuterSize(true) + "px";
 resizeFontSize(aa);
 
 document.getElementById("toggleDarkMode").onclick = toggleDarkMode;
