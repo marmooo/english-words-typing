@@ -349,6 +349,9 @@ function upKeyEvent(event) {
 }
 
 function typeEvent(event) {
+  if (key == " " || key == "Spacebar") {
+    event.preventDefault();  // ScrollLock
+  }
   typeEventKey(event.key);
 }
 
@@ -553,6 +556,7 @@ function countdown() {
 
 function startKeyEvent(event) {
   if (event.key == " " || event.key == "Spacebar") {
+    event.preventDefault();
     document.removeEventListener("keydown", startKeyEvent);
     replay();
   }
