@@ -476,7 +476,7 @@ function resizeFontSize(node) {
   const nodeHeight = calcAAOuterSize();
   const nodeWidth = infoPanel.clientWidth;
   const nodeRect = [nodeWidth, nodeHeight];
-  const textRect = getTextRect(node.innerText, fontSize, font, lineHeight);
+  const textRect = getTextRect(node.textContent, fontSize, font, lineHeight);
   const paddingRect = getPaddingRect(style);
 
   // https://stackoverflow.com/questions/46653569/
@@ -536,14 +536,14 @@ function countdown() {
   playPanel.classList.add("d-none");
   countPanel.classList.remove("d-none");
   scorePanel.classList.add("d-none");
-  counter.innerText = 3;
+  counter.textContent = 3;
   const timer = setInterval(function () {
     const counter = document.getElementById("counter");
     const colors = ["skyblue", "greenyellow", "violet", "tomato"];
-    if (parseInt(counter.innerText) > 1) {
-      const t = parseInt(counter.innerText) - 1;
+    if (parseInt(counter.textContent) > 1) {
+      const t = parseInt(counter.textContent) - 1;
       counter.style.backgroundColor = colors[t];
-      counter.innerText = t;
+      counter.textContent = t;
     } else {
       clearInterval(timer);
       document.getElementById("guideSwitch").disabled = false;
@@ -580,10 +580,10 @@ function startKeyEvent(event) {
 function startTypeTimer() {
   const timeNode = document.getElementById("time");
   typeTimer = setInterval(function () {
-    const arr = timeNode.innerText.split("秒 /");
+    const arr = timeNode.textContent.split("秒 /");
     const t = parseInt(arr[0]);
     if (t > 0) {
-      timeNode.innerText = (t - 1) + "秒 /" + arr[1];
+      timeNode.textContent = (t - 1) + "秒 /" + arr[1];
     } else {
       clearInterval(typeTimer);
       bgm.pause();
@@ -595,18 +595,18 @@ function startTypeTimer() {
 
 function downTime(n) {
   const timeNode = document.getElementById("time");
-  const arr = timeNode.innerText.split("秒 /");
+  const arr = timeNode.textContent.split("秒 /");
   const t = parseInt(arr[0]);
   const downedTime = t - n;
   if (downedTime < 0) {
-    timeNode.innerText = "0秒 /" + arr[1];
+    timeNode.textContent = "0秒 /" + arr[1];
   } else {
-    timeNode.innerText = downedTime + "秒 /" + arr[1];
+    timeNode.textContent = downedTime + "秒 /" + arr[1];
   }
 }
 
 function initTime() {
-  document.getElementById("time").innerText = gameTime + "秒 / " + gameTime +
+  document.getElementById("time").textContent = gameTime + "秒 / " + gameTime +
     "秒";
 }
 
@@ -623,9 +623,9 @@ function scoring() {
   document.removeEventListener("keydown", typeEvent);
   const grade = gradeOption.options[gradeOption.selectedIndex].value;
   const typeSpeed = (normalCount / gameTime).toFixed(2);
-  document.getElementById("totalType").innerText = normalCount + errorCount;
-  document.getElementById("typeSpeed").innerText = typeSpeed;
-  document.getElementById("errorType").innerText = errorCount;
+  document.getElementById("totalType").textContent = normalCount + errorCount;
+  document.getElementById("typeSpeed").textContent = typeSpeed;
+  document.getElementById("errorType").textContent = errorCount;
   document.getElementById("twitter").href =
     "https://twitter.com/intent/tweet?text=英単語タイピングの" + grade +
     "をプレイしたよ! (速度: " + typeSpeed + "回/秒) " +
