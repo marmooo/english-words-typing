@@ -268,7 +268,7 @@ function loadProblems() {
   fetch("data/" + grade + ".tsv").then(function (response) {
     return response.text();
   }).then(function (tsv) {
-    problems = tsv.split("\n").slice(0, -1).map((line) => {
+    problems = tsv.trim().split("\n").map((line) => {
       const [en, jaStr] = line.split("\t");
       const ja = jaStr.split("|").slice(0, 3).join("\n");
       return { en: en, ja: ja };
