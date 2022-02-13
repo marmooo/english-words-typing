@@ -372,7 +372,7 @@ function typeEvent(event) {
 
 function typeEventKey(key) {
   const currNode = romaNode.childNodes[typeIndex];
-  if (key.match(/^[^0-9]$/)) {
+  if (/^[^0-9]$/.test(key)) {
     if (key == currNode.textContent) {
       typeNormal(currNode);
       removeGuide(currNode);

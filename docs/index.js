@@ -24,7 +24,7 @@ function upKeyEvent(event){switch(event.key){case "Shift":case "CapsLock":if(gui
 function patchEvent(event){if(event.key=="@"&&event.code=="Digit2"){return '"';}else if(event.key=="&"&&event.code=="Digit7"){return "'";}else{return event.key;}}
 function typeEvent(event){const key=patchEvent(event);if(key==" "||key=="Spacebar"){event.preventDefault();}
 typeEventKey(key);}
-function typeEventKey(key){const currNode=romaNode.childNodes[typeIndex];if(key.match(/^[^0-9]$/)){if(key==currNode.textContent){typeNormal(currNode);removeGuide(currNode);underlineSpace(currNode);}else{playAudio(incorrectAudio,0.3);errorCount+=1;}
+function typeEventKey(key){const currNode=romaNode.childNodes[typeIndex];if(/^[^0-9]$/.test(key)){if(key==currNode.textContent){typeNormal(currNode);removeGuide(currNode);underlineSpace(currNode);}else{playAudio(incorrectAudio,0.3);errorCount+=1;}
 if(typeIndex==romaNode.childNodes.length){nextProblem();}else{showGuide(romaNode.childNodes[typeIndex]);}}else{switch(key){case "NonConvert":[...romaNode.children].forEach((span)=>{span.classList.remove("d-none");});downTime(5);break;case "Convert":{const text=romaNode.textContent;loopVoice(text,1);break;}
 case "Shift":case "CapsLock":if(guide){simpleKeyboard.setOptions({layoutName:"shift"});showGuide(romaNode.childNodes[typeIndex]);}
 break;case "Escape":case "Esc":replay();break;}}}
