@@ -1,13 +1,12 @@
-var CACHE_NAME = '2022-03-05 11:20';
+var CACHE_NAME = '2022-03-06 01:05';
 var urlsToCache = [
   '/english-words-typing/',
   '/english-words-typing/index.js',
-  '/english-words-typing/bgm.mp3',
-  '/english-words-typing/cat.mp3',
-  '/english-words-typing/correct.mp3',
-  '/english-words-typing/end.mp3',
-  '/english-words-typing/index.js',
-  '/english-words-typing/keyboard.mp3',
+  '/english-words-typing/mp3/bgm.mp3',
+  '/english-words-typing/mp3/cat.mp3',
+  '/english-words-typing/mp3/correct.mp3',
+  '/english-words-typing/mp3/end.mp3',
+  '/english-words-typing/mp3/keyboard.mp3',
   '/english-words-typing/favicon/original.svg',
   'https://marmooo.github.io/fonts/textar-light.woff2',
   'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css',
