@@ -37,7 +37,7 @@ const layout104 = {
   "shift": [
     "{esc} ~ ! @ # $ % ^ & * ( ) _",
     "{tab} Q W E R T Y U I O P { }",
-    '{lock} A S D F G H J K L :',
+    "{lock} A S D F G H J K L :",
     "{shift} Z X C V B N M < >",
     "🌏 無変換 {space} 変換",
   ],
@@ -265,17 +265,17 @@ function loopVoice(text, n) {
 
 function loadProblems() {
   const grade = gradeOption.selectedIndex;
-  fetch("data/" + grade + ".tsv").then(function (response) {
-    return response.text();
-  }).then(function (tsv) {
-    problems = tsv.trim().split("\n").map((line) => {
-      const [en, jaStr] = line.split("\t");
-      const ja = jaStr.split("|").slice(0, 3).join("\n");
-      return { en: en, ja: ja };
+  fetch("data/" + grade + ".tsv")
+    .then((response) => response.text())
+    .then((tsv) => {
+      problems = tsv.trim().split("\n").map((line) => {
+        const [en, jaStr] = line.split("\t");
+        const ja = jaStr.split("|").slice(0, 3).join("\n");
+        return { en: en, ja: ja };
+      });
+    }).catch(function (err) {
+      console.error(err);
     });
-  }).catch(function (err) {
-    console.error(err);
-  });
 }
 
 function typeNormal(currNode) {
@@ -365,7 +365,7 @@ function patchEvent(event) {
 function typeEvent(event) {
   const key = patchEvent(event);
   if (key == " " || key == "Spacebar") {
-    event.preventDefault();  // ScrollLock
+    event.preventDefault(); // ScrollLock
   }
   typeEventKey(key);
 }

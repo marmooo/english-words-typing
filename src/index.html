@@ -64,10 +64,14 @@
         font-size:10rem; width:12rem; height:12rem; line-height:12rem; border-radius: 50%;
         background:tomato; margin:auto; }
       #aaOuter {
+        height:calc(100vh - 460px); /* col-md の最小表示に合わせる */
         background:transparent; display:flex; align-items:center; justify-content:center;
         overflow:hidden;
       }
-      #aa { position:relative; top:0; left:0; margin:auto; }
+      #aa {
+        font-size:calc(calc(100vh - 460px) / 13); /* round(行数11×1.1)=13 */
+        position:relative; top:0; left:0; margin:auto;
+      }
       .hg-theme-default .hg-button { height:40px; font-size:2rem; }
       #typePanel { font-variant-ligatures:none; word-wrap: break-word; }
       #keyboard { touch-action:manipulation; }
@@ -193,7 +197,7 @@
 　　　　　（ 　　∪ 　＼　ヽﾉ（,,⊃⌒O～⌒ヽと　　 ﾉ
 　　 　 　 `ｕ-ｕ'　 　　＼ ／／;;;::*:::*:::*:::*:ヽ`u-u'　彡 ⌒ ミ
 　　　　　　　　　 彡⌒ ミ(　(:::;:*彡⌒ ミ:::*::*:彡 ⌒ミ(ω・｀ )
-　　　　彡 ⌒ ミ　(　　　)　＼::;;;::(　　　)　*:::*::(・｀　　)と　　) 　5秒減るけどな
+　　　　彡 ⌒ ミ　(　　　)　＼::;;;::(　　　)　*:::*::(・｀　　)と　　) 　5秒へるけどな
 　 　 　 (　　´・)　(　　∪　 　＼ι 　　)　─～と　　　) - ｕ'
 　　 　 ｜　Ｕ） 　`ｕ-ｕ' 　 　 　 ｀ｕ-ｕ'　￣￣~.`ｕ-ｕ'
             </pre>
