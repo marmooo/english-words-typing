@@ -1,20 +1,20 @@
 {
-    "name": "\u82f1\u5358\u8a9e\u30bf\u30a4\u30d4\u30f3\u30b0",
-    "short_name": "\u82f1\u5358\u8a9e\u30bf\u30a4\u30d4\u30f3\u30b0",
-    "icons": [
-        {
-            "src": "/english-words-typing/favicon/android-chrome-192x192.png",
-            "sizes": "192x192",
-            "type": "image/png"
-        },
-        {
-            "src": "/english-words-typing/favicon/android-chrome-512x512.png",
-            "sizes": "512x512",
-            "type": "image/png"
-        }
-    ],
-    "theme_color": "#ffffff",
-    "background_color": "#ffffff",
-    "start_url": "https://marmooo.github.io/english-words-typing/",
-    "display": "standalone"
+  "name": "英単語タイピング",
+  "short_name": "英単語タイピング",
+  "icons": [
+    {
+      "src": "/english-words-typing/favicon/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/english-words-typing/favicon/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "start_url": "https://marmooo.github.io/english-words-typing/",
+  "display": "standalone"
 }
