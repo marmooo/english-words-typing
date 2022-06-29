@@ -35,14 +35,14 @@ const layout104 = {
     "{tab} q w e r t y u i o p [ ]",
     "{lock} a s d f g h j k l ;",
     "{shift} z x c v b n m , .",
-    "🌏 無変換 {space} 変換",
+    "🌏 {altLeft} {space} {altRight}",
   ],
   "shift": [
     "{esc} ~ ! @ # $ % ^ & * ( ) _",
     "{tab} Q W E R T Y U I O P { }",
     "{lock} A S D F G H J K L :",
     "{shift} Z X C V B N M < >",
-    "🌏 無変換 {space} 変換",
+    "🌏 {altLeft} {space} {altRight}",
   ],
 };
 const layout109 = {
@@ -67,10 +67,12 @@ const keyboardDisplay = {
   "{lock}": "Caps",
   "{shift}": "Shift",
   "{space}": " ",
-  "🌏": "🇯🇵",
+  "{altLeft}": "Alt",
+  "{altRight}": "Alt",
+  "🌏": (navigator.language == "ja") ? "🇯🇵" : "🇺🇸",
 };
 const simpleKeyboard = new SimpleKeyboard.default({
-  layout: layout109,
+  layout: (navigator.language == "ja") ? layout109 : layout104,
   display: keyboardDisplay,
   onInit: () => {
     document.getElementById("keyboard").classList.add("d-none");
