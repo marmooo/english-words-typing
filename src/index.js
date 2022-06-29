@@ -9,9 +9,10 @@ const startButton = document.getElementById("startButton");
 const romaNode = document.getElementById("roma");
 const gradeOption = document.getElementById("gradeOption");
 const aa = document.getElementById("aa");
-const gameTime = 120;
 const tmpCanvas = document.createElement("canvas");
 const mode = document.getElementById("mode");
+const gameTime = 120;
+let playing;
 let typeTimer;
 // https://dova-s.jp/bgm/play3143.html
 const bgm = new Audio("mp3/bgm.mp3");
@@ -71,18 +72,20 @@ const keyboardDisplay = {
 const simpleKeyboard = new SimpleKeyboard.default({
   layout: layout109,
   display: keyboardDisplay,
-  onInit: function () {
+  onInit: () => {
     document.getElementById("keyboard").classList.add("d-none");
   },
-  onKeyPress: function (input) {
+  onKeyPress: (input) => {
     switch (input) {
       case "{esc}":
-        return typeEventKey("Esc");
+        return typeEventKey("Escape");
       case "{space}":
         return typeEventKey(" ");
       case "無変換":
+      case "{altLeft}":
         return typeEventKey("NonConvert");
       case "変換":
+      case "{altRight}":
         return typeEventKey("Convert");
       case "🌏":
         if (simpleKeyboard.options.layout == layout109) {
@@ -234,13 +237,13 @@ function loadAudios() {
 
 function loadVoices() {
   // https://stackoverflow.com/questions/21513706/
-  const allVoicesObtained = new Promise(function (resolve) {
+  const allVoicesObtained = new Promise((resolve) => {
     let voices = speechSynthesis.getVoices();
     if (voices.length !== 0) {
       resolve(voices);
     } else {
       let supported = false;
-      speechSynthesis.addEventListener("voiceschanged", function () {
+      speechSynthesis.addEventListener("voiceschanged", () => {
         supported = true;
         voices = speechSynthesis.getVoices();
         resolve(voices);
@@ -278,7 +281,7 @@ function loadProblems() {
         const ja = jaStr.split("|").slice(0, 3).join("\n");
         return { en: en, ja: ja };
       });
-    }).catch(function (err) {
+    }).catch((err) => {
       console.error(err);
     });
 }
@@ -368,14 +371,48 @@ function patchEvent(event) {
 }
 
 function typeEvent(event) {
-  const key = patchEvent(event);
-  if (key == " " || key == "Spacebar") {
-    event.preventDefault(); // ScrollLock
+  switch (event.code) {
+    case "AltLeft":
+      return typeEventKey("NonConvert");
+    case "AltRight":
+      return typeEventKey("Convert");
+    case "Space":
+      event.preventDefault();
+      // falls through
+    default:
+      return typeEventKey(event.key);
   }
-  typeEventKey(key);
 }
 
 function typeEventKey(key) {
+  switch (key) {
+    case "NonConvert":
+      [...romaNode.children].forEach((span) => {
+        span.style.visibility = "visible";
+      });
+      downTime(5);
+      return;
+    case "Convert": {
+      const text = romaNode.textContent;
+      loopVoice(text, 1);
+      return;
+    }
+    case "Shift":
+    case "CapsLock":
+      if (guide) {
+        simpleKeyboard.setOptions({ layoutName: "shift" });
+        showGuide(romaNode.childNodes[typeIndex]);
+      }
+      return;
+    case "Escape":
+      replay();
+      return;
+    case " ":
+      if (!playing) {
+        replay();
+        return;
+      }
+  }
   const currNode = romaNode.childNodes[typeIndex];
   if (/^[^0-9]$/.test(key)) {
     if (key == currNode.textContent) {
@@ -396,38 +433,12 @@ function typeEventKey(key) {
     } else {
       showGuide(romaNode.childNodes[typeIndex]);
     }
-  } else {
-    switch (key) {
-      case "NonConvert":
-        [...romaNode.children].forEach((span) => {
-          span.style.visibility = "visible";
-        });
-        downTime(5);
-        break;
-      case "Convert": {
-        const text = romaNode.textContent;
-        loopVoice(text, 1);
-        break;
-      }
-      case "Shift":
-      case "CapsLock":
-        if (guide) {
-          simpleKeyboard.setOptions({ layoutName: "shift" });
-          showGuide(romaNode.childNodes[typeIndex]);
-        }
-        break;
-      case "Escape":
-      case "Esc":
-        replay();
-        break;
-    }
   }
 }
 
 function replay() {
   clearInterval(typeTimer);
   removeGuide(romaNode.childNodes[typeIndex]);
-  document.removeEventListener("keydown", typeEvent);
   initTime();
   loadProblems();
   countdown();
@@ -525,13 +536,14 @@ function typable() {
 }
 
 function countdown() {
+  playing = true;
   typeIndex = normalCount = errorCount = solveCount = 0;
   document.getElementById("guideSwitch").disabled = true;
   document.getElementById("virtualKeyboard").disabled = true;
   gamePanel.classList.add("d-none");
   countPanel.classList.remove("d-none");
   counter.textContent = 3;
-  const timer = setInterval(function () {
+  const timer = setInterval(() => {
     const counter = document.getElementById("counter");
     const colors = ["skyblue", "greenyellow", "violet", "tomato"];
     if (parseInt(counter.textContent) > 1) {
@@ -564,17 +576,9 @@ function countdown() {
   }, 1000);
 }
 
-function startKeyEvent(event) {
-  if (event.key == " " || event.key == "Spacebar") {
-    event.preventDefault();
-    document.removeEventListener("keydown", startKeyEvent);
-    replay();
-  }
-}
-
 function startTypeTimer() {
   const timeNode = document.getElementById("time");
-  typeTimer = setInterval(function () {
+  typeTimer = setInterval(() => {
     const arr = timeNode.textContent.split("秒 /");
     const t = parseInt(arr[0]);
     if (t > 0) {
@@ -605,18 +609,18 @@ function initTime() {
     "秒";
 }
 
-gradeOption.addEventListener("change", function () {
+gradeOption.addEventListener("change", () => {
   initTime();
   clearInterval(typeTimer);
 });
 
 function scoring() {
+  playing = false;
   infoPanel.classList.remove("d-none");
   playPanel.classList.add("d-none");
   aaOuter.classList.add("d-none");
   countPanel.classList.add("d-none");
   scorePanel.classList.remove("d-none");
-  document.removeEventListener("keydown", typeEvent);
   const grade = gradeOption.options[gradeOption.selectedIndex].value;
   const typeSpeed = (normalCount / gameTime).toFixed(2);
   document.getElementById("totalType").textContent = normalCount + errorCount;
@@ -626,7 +630,6 @@ function scoring() {
     "https://twitter.com/intent/tweet?text=英単語タイピングの" + grade +
     "をプレイしたよ! (速度: " + typeSpeed + "回/秒) " +
     "&url=https%3a%2f%2fmarmooo.github.com/hageda%2f&hashtags=英単語タイピング";
-  document.addEventListener("keydown", startKeyEvent);
 }
 
 function changeMode() {
@@ -642,14 +645,14 @@ resizeFontSize(aa);
 document.getElementById("toggleDarkMode").onclick = toggleDarkMode;
 document.getElementById("toggleBGM").onclick = toggleBGM;
 document.getElementById("virtualKeyboard").onclick = toggleKeyboard;
-window.addEventListener("resize", function () {
+window.addEventListener("resize", () => {
   resizeFontSize(aa);
 });
 document.getElementById("mode").onclick = changeMode;
 document.getElementById("guideSwitch").onchange = toggleGuide;
 startButton.addEventListener("click", replay);
 document.addEventListener("keyup", upKeyEvent);
-document.addEventListener("keydown", startKeyEvent);
+document.addEventListener("keydown", typeEvent);
 document.addEventListener("click", unlockAudio, {
   once: true,
   useCapture: true,
