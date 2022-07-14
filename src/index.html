@@ -145,27 +145,32 @@ sudo apt install festival speech-dispatcher-festival</code></pre>
             </div>
             <div id="timePanel" class="col-sm text-center">
               <div class="alert alert-info">
-                <div class="row flex-wrap">
-                  <div class="col p-1 h5 text-nowrap">
-                    <label><ruby>時間<rp>(</rp><rt>じかん</rt><rp>)</rp></ruby>:</label>
-                    <span id="time" class="ms-1">120秒 / 120秒</span>
+                <div class="d-flex flex-wrap justify-content-center">
+                  <div class="h5 text-nowrap me-4 notranslate">
+                    <span id="time">120</span>
+                    <span> / 120 sec</span>
                   </div>
-                  <div class="col p-1 m-auto">
-                    <button id="mode" class="btn btn-secondary btn-sm">EASY</button>
-                    <div class="form-check form-check-inline form-switch text-nowrap ms-1 py-1">
+                  <div>
+                    <button id="mode" class="btn btn-secondary btn-sm notranslate">EASY</button>
+                    <div class="form-check form-check-inline form-switch text-nowrap ms-1">
                       <input class="form-check-input" type="checkbox" id="guideSwitch">
                       <label class="form-check-label" for="guideSwitch">ガイド</label>
                     </div>
                   </div>
                 </div>
-                <div>
-                  <button id="startButton" class="btn btm-sm btn-primary">SPACE: スタート / ESC: リセット</button>
+                <div class="mt-2">
+                  <button id="startButton" class="btn btm-sm btn-primary">
+                    <kbd>Space</kbd>
+                    <span class="ms-1">スタート</span>
+                    <kbd class="ms-3">Esc</kbd>
+                    <span class="ms-1">リセット</span>
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div id="aaOuter" class="flex-grow-1">
+        <div id="aaOuter" class="flex-grow-1 notranslate">
           <pre id="aa" class="aa">　　　　　　　　彡 ⌒ ミ　　彡 ⌒ ミ　　　　　　　スペルがわからない時は？
 　彡 ⌒ ミ　　 (´・ω・)　　 (・ω・｀) 　彡 ⌒ ミ
 　(　´・ω)　　（∪　Ｕ)　　 ( つと ﾉ　　(ω・｀ )
@@ -186,16 +191,21 @@ sudo apt install festival speech-dispatcher-festival</code></pre>
           <div id="keyboard" class="d-none simple-keyboard"></div>
         </div>
         <div id="scorePanel" class="text-center pb-3 d-none">
-          <h3 class="pt-3">タイピング結果</h3>
-          <pre class="aa">　　　　／￣|
+          <h3 class="pt-3">スコア</h3>
+          <div class="d-flex justify-content-center align-items-center">
+            <div class="notranslate">
+              <pre class="aa">　　　　／￣|
   　　　　|　　｜
   　　　 ｜ 　｜.　彡⌒ ミ
-  　 ,―　　　　＼(´・ω・｀)　スコアだよ！
+  　 ,―　　　　＼(´・ω・｀)
   　| ＿＿_） 　 ｜　　ノ
   　| ＿＿_） 　 ｜）＿フ
   　| ＿＿_） 　 ｜
   　ヽ＿＿）＿／
-          </pre>
+              </pre>
+            </div>
+            <div class="ps-1">スコアだよ！</div>
+          </div>
           <table class="table table-striped">
             <tr><td>総タイプ数</td><td><span id="totalType"></span> <span>回</span></td></tr>
             <tr><td>スピード</td><td><span id="typeSpeed"></span> <span>回/秒</span></td></tr>
@@ -204,7 +214,7 @@ sudo apt install festival speech-dispatcher-festival</code></pre>
           <a id="twitter" target="_blank" href="https://twitter.com/intent/tweet?text=英単語タイピングで遊んだよ!&url=https%3a%2f%2fmarmooo.github.com/english-words-typing/%2f&hashtags=英単語タイピング" class="btn btn-primary" role="button">Twitter でつぶやく</a>
         </div>
       </div>
-      <div id="countPanel" class="text-center d-none">
+      <div id="countPanel" class="text-center d-none notranslate">
         <div id="counter"></div>
         <pre class="aa">
 

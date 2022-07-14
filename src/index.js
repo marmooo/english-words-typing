@@ -581,10 +581,9 @@ function countdown() {
 function startTypeTimer() {
   const timeNode = document.getElementById("time");
   typeTimer = setInterval(() => {
-    const arr = timeNode.textContent.split("秒 /");
-    const t = parseInt(arr[0]);
+    const t = parseInt(timeNode.textContent);
     if (t > 0) {
-      timeNode.textContent = (t - 1) + "秒 /" + arr[1];
+      timeNode.textContent = t - 1;
     } else {
       clearInterval(typeTimer);
       bgm.pause();
@@ -596,19 +595,17 @@ function startTypeTimer() {
 
 function downTime(n) {
   const timeNode = document.getElementById("time");
-  const arr = timeNode.textContent.split("秒 /");
-  const t = parseInt(arr[0]);
+  const t = parseInt(timeNode.textContent);
   const downedTime = t - n;
   if (downedTime < 0) {
-    timeNode.textContent = "0秒 /" + arr[1];
+    timeNode.textContent = 0;
   } else {
-    timeNode.textContent = downedTime + "秒 /" + arr[1];
+    timeNode.textContent = downedTime;
   }
 }
 
 function initTime() {
-  document.getElementById("time").textContent = gameTime + "秒 / " + gameTime +
-    "秒";
+  document.getElementById("time").textContent = gameTime;
 }
 
 gradeOption.addEventListener("change", () => {
