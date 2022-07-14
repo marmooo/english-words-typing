@@ -573,7 +573,6 @@ function countdown() {
       if (localStorage.getItem("bgm") == 1) {
         bgm.play();
       }
-      document.addEventListener("keydown", typeEvent);
     }
   }, 1000);
 }
