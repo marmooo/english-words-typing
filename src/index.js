@@ -444,7 +444,11 @@ function replay() {
   initTime();
   loadProblems();
   countdown();
-  typeIndex = normalCount = errorCount = solveCount = 0;
+  typeIndex =
+    normalCount =
+    errorCount =
+    solveCount =
+      0;
   countPanel.classList.remove("d-none");
   scorePanel.classList.add("d-none");
 }
@@ -539,7 +543,11 @@ function typable() {
 
 function countdown() {
   playing = true;
-  typeIndex = normalCount = errorCount = solveCount = 0;
+  typeIndex =
+    normalCount =
+    errorCount =
+    solveCount =
+      0;
   document.getElementById("guideSwitch").disabled = true;
   document.getElementById("virtualKeyboard").disabled = true;
   gamePanel.classList.add("d-none");
