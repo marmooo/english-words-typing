@@ -162,19 +162,9 @@ function toggleKeyboard() {
 }
 
 function toggleGuide() {
-  const virtualKeyboardOn = document.getElementById("virtualKeyboardOn");
-  const virtualKeyboardOff = document.getElementById("virtualKeyboardOff");
   if (this.checked) {
-    virtualKeyboardOn.classList.remove("d-none");
-    virtualKeyboardOff.classList.add("d-none");
-    document.getElementById("keyboard").classList.remove("d-none");
-    resizeFontSize(aa);
     guide = true;
   } else {
-    virtualKeyboardOn.classList.add("d-none");
-    virtualKeyboardOff.classList.remove("d-none");
-    document.getElementById("keyboard").classList.add("d-none");
-    resizeFontSize(aa);
     guide = false;
   }
 }
