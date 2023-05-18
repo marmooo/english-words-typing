@@ -163,8 +163,8 @@ function toggleKeyboard() {
   }
 }
 
-function toggleGuide() {
-  if (this.checked) {
+function toggleGuide(event) {
+  if (event.target.checked) {
     guide = true;
   } else {
     guide = false;
@@ -637,11 +637,11 @@ function scoring() {
     "&url=https%3a%2f%2fmarmooo.github.com/hageda%2f&hashtags=英単語タイピング";
 }
 
-function changeMode() {
-  if (this.textContent == "EASY") {
-    this.textContent = "HARD";
+function changeMode(event) {
+  if (event.target.textContent == "EASY") {
+    event.target.textContent = "HARD";
   } else {
-    this.textContent = "EASY";
+    event.target.textContent = "EASY";
   }
 }
 
