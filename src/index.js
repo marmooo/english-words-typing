@@ -1,6 +1,5 @@
 const remSize = parseInt(getComputedStyle(document.documentElement).fontSize);
 const gamePanel = document.getElementById("gamePanel");
-const playPanel = document.getElementById("playPanel");
 const infoPanel = document.getElementById("infoPanel");
 const countPanel = document.getElementById("countPanel");
 const scorePanel = document.getElementById("scorePanel");
@@ -23,12 +22,7 @@ let errorCount = 0;
 let normalCount = 0;
 let solveCount = 0;
 let problems = [];
-let englishVoices = [];
 let guide = false;
-let keyboardAudio, correctAudio, incorrectAudio, endAudio;
-loadAudios();
-const AudioContext = window.AudioContext || window.webkitAudioContext;
-const audioContext = new AudioContext();
 const layout104 = {
   "default": [
     "{esc} ` 1 2 3 4 5 6 7 8 9 0 -",
@@ -117,6 +111,14 @@ const simpleKeyboard = new SimpleKeyboard.default({
     }
   },
 });
+const audioContext = new AudioContext();
+const audioBufferCache = {};
+loadAudio("end", "mp3/end.mp3");
+loadAudio("keyboard", "mp3/keyboard.mp3");
+loadAudio("correct", "mp3/correct.mp3");
+loadAudio("incorrect", "mp3/cat.mp3");
+let englishVoices = [];
+loadVoices();
 loadConfig();
 
 function loadConfig() {
@@ -179,52 +181,33 @@ function toggleDarkMode() {
   }
 }
 
-function playAudio(audioBuffer, volume) {
-  const audioSource = audioContext.createBufferSource();
-  audioSource.buffer = audioBuffer;
+async function playAudio(name, volume) {
+  const audioBuffer = await loadAudio(name, audioBufferCache[name]);
+  const sourceNode = audioContext.createBufferSource();
+  sourceNode.buffer = audioBuffer;
   if (volume) {
     const gainNode = audioContext.createGain();
     gainNode.gain.value = volume;
     gainNode.connect(audioContext.destination);
-    audioSource.connect(gainNode);
-    audioSource.start();
+    sourceNode.connect(gainNode);
+    sourceNode.start();
   } else {
-    audioSource.connect(audioContext.destination);
-    audioSource.start();
+    sourceNode.connect(audioContext.destination);
+    sourceNode.start();
   }
+}
+
+async function loadAudio(name, url) {
+  if (audioBufferCache[name]) return audioBufferCache[name];
+  const response = await fetch(url);
+  const arrayBuffer = await response.arrayBuffer();
+  const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+  audioBufferCache[name] = audioBuffer;
+  return audioBuffer;
 }
 
 function unlockAudio() {
   audioContext.resume();
-}
-
-function loadAudio(url) {
-  return fetch(url)
-    .then((response) => response.arrayBuffer())
-    .then((arrayBuffer) => {
-      return new Promise((resolve, reject) => {
-        audioContext.decodeAudioData(arrayBuffer, (audioBuffer) => {
-          resolve(audioBuffer);
-        }, (err) => {
-          reject(err);
-        });
-      });
-    });
-}
-
-function loadAudios() {
-  promises = [
-    loadAudio("mp3/keyboard.mp3"),
-    loadAudio("mp3/correct.mp3"),
-    loadAudio("mp3/cat.mp3"),
-    loadAudio("mp3/end.mp3"),
-  ];
-  Promise.all(promises).then((audioBuffers) => {
-    keyboardAudio = audioBuffers[0];
-    correctAudio = audioBuffers[1];
-    incorrectAudio = audioBuffers[2];
-    endAudio = audioBuffers[3];
-  });
 }
 
 function loadVoices() {
@@ -283,7 +266,6 @@ function loadVoices() {
       .filter((voice) => !jokeVoices.includes(voice.voiceURI));
   });
 }
-loadVoices();
 
 function loopVoice(text, n) {
   speechSynthesis.cancel();
@@ -312,7 +294,7 @@ function loadProblems() {
 
 function typeNormal(currNode) {
   currNode.style.visibility = "visible";
-  playAudio(keyboardAudio);
+  playAudio("keyboard");
   currNode.style.color = "silver";
   typeIndex += 1;
   normalCount += 1;
@@ -329,7 +311,7 @@ function underlineSpace(currNode) {
 }
 
 function nextProblem() {
-  playAudio(correctAudio);
+  playAudio("correct");
   typeIndex = 0;
   solveCount += 1;
   typable();
@@ -446,10 +428,10 @@ function typeEventKey(key) {
     } else {
       // const state = checkTypeStyle(currNode, currNode.textContent, event.key, romaNode);
       // if (!state) {
-      //   playAudio(incorrectAudio, 0.3);
+      //   playAudio("incorrect", 0.3);
       //   errorCount += 1;
       // }
-      playAudio(incorrectAudio, 0.3);
+      playAudio("incorrect", 0.3);
       errorCount += 1;
     }
     if (typeIndex == romaNode.childNodes.length) {
@@ -612,7 +594,7 @@ function startTypeTimer() {
     } else {
       clearInterval(typeTimer);
       bgm.pause();
-      playAudio(endAudio);
+      playAudio("end");
       scoring();
     }
   }, 1000);
