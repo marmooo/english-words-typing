@@ -546,6 +546,8 @@ function countdown() {
     } else {
       countdowning = false;
       playing = true;
+      const prevKey = romaNode.children[1].textContent;
+      removeGuide(prevKey);
       normalCount = errorCount = solveCount = 0;
       clearInterval(timer);
       document.getElementById("guideSwitch").disabled = false;
