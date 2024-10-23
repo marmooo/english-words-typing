@@ -174,8 +174,10 @@ function toggleKeyboard() {
 function toggleGuide(event) {
   if (event.target.checked) {
     guide = true;
+    showGuide(romaNode.children[1].textContent);
   } else {
     guide = false;
+    removeGuide(romaNode.children[1].textContent);
   }
 }
 
