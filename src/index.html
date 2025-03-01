@@ -54,9 +54,8 @@
         font-size:10rem; width:12rem; height:12rem; line-height:12rem; border-radius: 50%;
         background:tomato; color:black; margin:auto; }
       #aaOuter {
-        height:calc(100vh - 320px);
+        height:calc(100vh - 320px); overflow:hidden;
         background:transparent; display:flex; align-items:center; justify-content:center;
-        overflow:hidden;
       }
       #aa { position:relative; top:0; left:0; margin:auto; }
       #typePanel { font-variant-ligatures:none; word-wrap: break-word; }
@@ -215,7 +214,7 @@ sudo apt install festival speech-dispatcher-festival</code></pre>
       </div>
     </footer>
     <template id="gamePanelTemplate">
-      <div id="aaOuter" class="flex-grow-1 notranslate">
+      <div id="aaOuter" class="notranslate">
         <pre id="aa" class="aa">　　　　　　　　彡 ⌒ ミ　　彡 ⌒ ミ　　　　　　　スペルがわからない時は？
 　彡 ⌒ ミ　　 (´・ω・)　　 (・ω・｀) 　彡 ⌒ ミ
 　(　´・ω)　　（∪　Ｕ)　　 ( つと ﾉ　　(ω・｀ )
