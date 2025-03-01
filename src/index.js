@@ -1,5 +1,8 @@
 import simpleKeyboard from "https://cdn.jsdelivr.net/npm/simple-keyboard@3.7.77/+esm";
 
+document.getElementById("gamePanel")
+  .appendChild(document.getElementById("gamePanelTemplate").content);
+
 const remSize = parseInt(getComputedStyle(document.documentElement).fontSize);
 const gamePanel = document.getElementById("gamePanel");
 const infoPanel = document.getElementById("infoPanel");
