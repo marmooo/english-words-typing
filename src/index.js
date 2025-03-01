@@ -475,7 +475,7 @@ function resizeFontSize(node) {
   const font = style.fontFamily;
   const fontSize = parseFloat(style.fontSize);
   const lineHeight = parseFloat(style.lineHeight) / fontSize;
-  const nodeHeight = document.getElementById("aaOuter").offsetHeight;
+  const nodeHeight = globalThis.offsetHeight - 320;
   const nodeWidth = infoPanel.clientWidth;
   const nodeRect = [nodeWidth, nodeHeight];
   const textRect = getTextRect(node.textContent, fontSize, font, lineHeight);
