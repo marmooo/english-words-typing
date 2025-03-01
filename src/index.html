@@ -54,11 +54,11 @@
         font-size:10rem; width:12rem; height:12rem; line-height:12rem; border-radius: 50%;
         background:tomato; color:black; margin:auto; }
       #aaOuter {
+        height:calc(100vh - 320px);
         background:transparent; display:flex; align-items:center; justify-content:center;
         overflow:hidden;
       }
       #aa { position:relative; top:0; left:0; margin:auto; }
-      #gamePanel {  height:calc(100vh - 320px); }
       #typePanel { font-variant-ligatures:none; word-wrap: break-word; }
       #keyboard { touch-action:manipulation; }
       .hg-theme-default .hg-button { height:40px; font-size:2rem; }
@@ -162,7 +162,7 @@ sudo apt install festival speech-dispatcher-festival</code></pre>
           </div>
         </div>
       </div>
-      <div id="gamePanel" class="d-flex flex-column"></div>
+      <div id="gamePanel"></div>
       <div id="scorePanel" class="text-center pb-3 d-none">
         <h3 class="pt-3">スコア</h3>
         <div class="d-flex justify-content-center align-items-center">
