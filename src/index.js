@@ -2,7 +2,6 @@ import simpleKeyboard from "https://cdn.jsdelivr.net/npm/simple-keyboard@3.7.77/
 
 const remSize = parseInt(getComputedStyle(document.documentElement).fontSize);
 const gamePanel = document.getElementById("gamePanel");
-const keyboardPanel = document.getElementById("keyboard");
 const infoPanel = document.getElementById("infoPanel");
 const countPanel = document.getElementById("countPanel");
 const scorePanel = document.getElementById("scorePanel");
@@ -531,6 +530,12 @@ function typable() {
   changeVisibility(visibility);
   resizeFontSize(aa);
   if (guide) showGuide(roma[0]);
+
+  const aaOuter = document.getElementById("aaOuter");
+  const typePanel = document.getElementById("typePanel");
+  const keyboardPanel = document.getElementById("keyboard");
+  aaOuter.insertAfter(typePanel);
+  typePanel.insertAfter(keyboardPanel);
 }
 
 function countdown() {
@@ -540,7 +545,6 @@ function countdown() {
   document.getElementById("guideSwitch").disabled = true;
   document.getElementById("virtualKeyboard").disabled = true;
   gamePanel.classList.add("d-none");
-  keyboardPanel.classList.add("d-none");
   infoPanel.classList.add("d-none");
   countPanel.classList.remove("d-none");
   counter.textContent = 3;
@@ -561,11 +565,14 @@ function countdown() {
       document.getElementById("guideSwitch").disabled = false;
       document.getElementById("virtualKeyboard").disabled = false;
       gamePanel.classList.remove("d-none");
-      keyboardPanel.classList.remove("d-none");
       countPanel.classList.add("d-none");
       infoPanel.classList.remove("d-none");
       scorePanel.classList.add("d-none");
       resizeFontSize(aa);
+      globalThis.scrollTo({
+        top: document.getElementById("gamePanel").getBoundingClientRect().top,
+        behavior: "auto",
+      });
       typable();
       startTypeTimer();
     }
@@ -611,7 +618,6 @@ function scoring() {
   playing = false;
   infoPanel.classList.remove("d-none");
   gamePanel.classList.add("d-none");
-  keyboardPanel.classList.add("d-none");
   countPanel.classList.add("d-none");
   scorePanel.classList.remove("d-none");
   const grade = gradeOption.options[gradeOption.selectedIndex].value;
