@@ -534,8 +534,7 @@ function typable() {
   const aaOuter = document.getElementById("aaOuter");
   const typePanel = document.getElementById("typePanel");
   const keyboardPanel = document.getElementById("keyboard");
-  aaOuter.insertAfter(typePanel);
-  typePanel.insertAfter(keyboardPanel);
+  aaOuter.after(typePanel, keyboardPanel);
 }
 
 function countdown() {
