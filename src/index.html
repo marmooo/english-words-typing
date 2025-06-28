@@ -53,6 +53,7 @@
       #counter {
         font-size:10rem; width:12rem; height:12rem; line-height:12rem; border-radius: 50%;
         background:tomato; color:black; margin:auto; }
+      #gamePanel { calc(100vh - 238px); }
       #aaOuter {
         height:calc(100vh - 320px); overflow:hidden;
         background:transparent; display:flex; align-items:center; justify-content:center;
@@ -161,7 +162,28 @@ sudo apt install festival speech-dispatcher-festival</code></pre>
           </div>
         </div>
       </div>
-      <div id="gamePanel"></div>
+      <div id="gamePanel">
+        <div id="aaOuter" class="notranslate">
+          <pre id="aa" class="aa">　　　　　　　　彡 ⌒ ミ　　彡 ⌒ ミ　　　　　　　スペルがわからない時は？
+　彡 ⌒ ミ　　 (´・ω・)　　 (・ω・｀) 　彡 ⌒ ミ
+　(　´・ω)　　（∪　Ｕ)　　 ( つと ﾉ　　(ω・｀ )
+　｜　Ｕ彡 ⌒ ミｕ-＿＿＿_彡 ⌒ ミ　 (∪ 彡⌒ ミ
+　　ｕ-ｕ (　　´・)　（　　(⌒ （´･ω･`）＼　　(・｀　　)　ヒント機能があるぞ！
+　　　　　（ 　　∪ 　＼　ヽﾉ（,,⊃⌒O～⌒ヽと　　 ﾉ
+　　 　 　 `ｕ-ｕ'　 　　＼ ／／;;;::*:::*:::*:::*:ヽ`u-u'　彡 ⌒ ミ
+　　　　　　　　　 彡⌒ ミ(　(:::;:*彡⌒ ミ:::*::*:彡 ⌒ミ(ω・｀ )
+　　　　彡 ⌒ ミ　(　　　)　＼::;;;::(　　　)　*:::*::(・｀　　)と　　) 　5秒へるけどな
+　 　 　 (　　´・)　(　　∪　 　＼ι 　　)　─～と　　　) - ｕ'
+　　 　 ｜　Ｕ） 　`ｕ-ｕ' 　 　 　 ｀ｕ-ｕ'　￣￣~.`ｕ-ｕ'
+          </pre>
+        </div>
+        <div id="typePanel" class="alert alert-info mb-0 h1 text-center notranslate">
+          <div id="roma">
+            <span class="inputed"></span><span class="wanted">r</span><span class="remained">un</span>
+          </div>
+        </div>
+      </div>
+      <div id="keyboard" class="d-none simple-keyboard notranslate"></div>
       <div id="scorePanel" class="text-center pb-3 d-none">
         <h3 class="pt-3">スコア</h3>
         <div class="d-flex justify-content-center align-items-center">
@@ -213,28 +235,6 @@ sudo apt install festival speech-dispatcher-festival</code></pre>
       <div class="text-muted">&copy; <a href="https://github.com/marmooo">marmooo</a>
       </div>
     </footer>
-    <template id="gamePanelTemplate">
-      <div id="aaOuter" class="notranslate">
-        <pre id="aa" class="aa">　　　　　　　　彡 ⌒ ミ　　彡 ⌒ ミ　　　　　　　スペルがわからない時は？
-　彡 ⌒ ミ　　 (´・ω・)　　 (・ω・｀) 　彡 ⌒ ミ
-　(　´・ω)　　（∪　Ｕ)　　 ( つと ﾉ　　(ω・｀ )
-　｜　Ｕ彡 ⌒ ミｕ-＿＿＿_彡 ⌒ ミ　 (∪ 彡⌒ ミ
-　　ｕ-ｕ (　　´・)　（　　(⌒ （´･ω･`）＼　　(・｀　　)　ヒント機能があるぞ！
-　　　　　（ 　　∪ 　＼　ヽﾉ（,,⊃⌒O～⌒ヽと　　 ﾉ
-　　 　 　 `ｕ-ｕ'　 　　＼ ／／;;;::*:::*:::*:::*:ヽ`u-u'　彡 ⌒ ミ
-　　　　　　　　　 彡⌒ ミ(　(:::;:*彡⌒ ミ:::*::*:彡 ⌒ミ(ω・｀ )
-　　　　彡 ⌒ ミ　(　　　)　＼::;;;::(　　　)　*:::*::(・｀　　)と　　) 　5秒へるけどな
-　 　 　 (　　´・)　(　　∪　 　＼ι 　　)　─～と　　　) - ｕ'
-　　 　 ｜　Ｕ） 　`ｕ-ｕ' 　 　 　 ｀ｕ-ｕ'　￣￣~.`ｕ-ｕ'
-        </pre>
-      </div>
-      <div id="typePanel" class="alert alert-info mb-0 h1 text-center notranslate">
-        <div id="roma">
-          <span class="inputed"></span><span class="wanted">r</span><span class="remained">un</span>
-        </div>
-      </div>
-      <div id="keyboard" class="d-none simple-keyboard notranslate"></div>
-    </template>
     <script type="module" src="index.js"></script>
   </body>
 </html>
