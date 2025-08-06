@@ -191,10 +191,6 @@ function createAudioContext() {
 }
 
 function unlockAudio() {
-  const uttr = new SpeechSynthesisUtterance("");
-  uttr.lang = "en-US";
-  speechSynthesis.speak(uttr);
-
   if (audioContext) {
     audioContext.resume();
   } else {
@@ -530,13 +526,14 @@ function typable() {
 }
 
 function countdown() {
+  if (countdowning) return;
+  countdowning = true;
   const aaOuter = document.getElementById("aaOuter");
   const typePanel = document.getElementById("typePanel");
   const keyboardPanel = document.getElementById("keyboard");
   aaOuter.after(typePanel, keyboardPanel);
+  speak("Ready"); // unlock
 
-  if (countdowning) return;
-  countdowning = true;
   if (localStorage.getItem("bgm") == 1) bgm.play();
   document.getElementById("guideSwitch").disabled = true;
   document.getElementById("virtualKeyboard").disabled = true;
